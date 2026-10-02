@@ -1,11 +1,10 @@
 import { PageHeader } from "@/app/_components/page-header";
 import { pastOrders, type PastOrder } from "@/lib/data/past-orders";
+import { CAFE_TIME_ZONE, dayKey } from "@/lib/usage";
 
 // Owner: TBD
 // Mockup: past orders showing items, quantity and timestamp only. Reads from
 // lib/data/past-orders.ts until orders are stored for real.
-
-const CAFE_TIME_ZONE = "America/New_York";
 
 const dayLabel = new Intl.DateTimeFormat("en-US", {
   weekday: "long",
@@ -20,22 +19,14 @@ const timeLabel = new Intl.DateTimeFormat("en-US", {
   timeZone: CAFE_TIME_ZONE,
 });
 
-/** YYYY-MM-DD in the cafe's timezone, so days group and compare correctly. */
-const dayKey = new Intl.DateTimeFormat("en-CA", {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-  timeZone: CAFE_TIME_ZONE,
-});
-
 function groupByDay(orders: PastOrder[]) {
-  const today = dayKey.format(new Date());
-  const yesterday = dayKey.format(new Date(Date.now() - 86_400_000));
+  const today = dayKey(new Date());
+  const yesterday = dayKey(new Date(Date.now() - 86_400_000));
   const groups: { key: string; label: string; orders: PastOrder[] }[] = [];
 
   for (const order of orders) {
     const date = new Date(order.placedAt);
-    const key = dayKey.format(date);
+    const key = dayKey(date);
     let group = groups.find((g) => g.key === key);
     if (!group) {
       const label =

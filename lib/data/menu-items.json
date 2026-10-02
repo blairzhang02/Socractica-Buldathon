@@ -1,40 +1,305 @@
 {
   "currency": "USD",
   "ingredients": [
-    { "id": "flour-00",       "name": "00 Pizza Flour",      "unit": "g",    "unitPrice": 0.0021, "supplier": "Bay Mills" },
-    { "id": "water",          "name": "Filtered Water",      "unit": "ml",   "unitPrice": 0.0001, "supplier": "In-house" },
-    { "id": "yeast-fresh",    "name": "Fresh Yeast",         "unit": "g",    "unitPrice": 0.0120, "supplier": "Bay Mills" },
-    { "id": "salt-sea",       "name": "Fine Sea Salt",       "unit": "g",    "unitPrice": 0.0030, "supplier": "Coastal Foods" },
-    { "id": "oil-olive",      "name": "Extra Virgin Olive Oil", "unit": "ml", "unitPrice": 0.0145, "supplier": "Coastal Foods" },
-    { "id": "tomato-san-marzano", "name": "San Marzano Tomatoes", "unit": "g", "unitPrice": 0.0048, "supplier": "Coastal Foods" },
-    { "id": "mozzarella-fdl", "name": "Fior di Latte",       "unit": "g",    "unitPrice": 0.0132, "supplier": "Valley Dairy" },
-    { "id": "basil-fresh",    "name": "Fresh Basil",         "unit": "g",    "unitPrice": 0.0410, "supplier": "Green Row" },
-    { "id": "parmesan",       "name": "Parmigiano Reggiano", "unit": "g",    "unitPrice": 0.0295, "supplier": "Valley Dairy" },
-    { "id": "sausage-fennel", "name": "Fennel Sausage",      "unit": "g",    "unitPrice": 0.0186, "supplier": "Hill Butchery" },
-    { "id": "onion-red",      "name": "Red Onion",           "unit": "g",    "unitPrice": 0.0024, "supplier": "Green Row" },
-    { "id": "chili-flake",    "name": "Calabrian Chili Flake", "unit": "g",  "unitPrice": 0.0520, "supplier": "Coastal Foods" },
-    { "id": "butter",         "name": "Unsalted Butter",     "unit": "g",    "unitPrice": 0.0094, "supplier": "Valley Dairy" },
-    { "id": "sugar-granulated", "name": "Granulated Sugar",  "unit": "g",    "unitPrice": 0.0016, "supplier": "Bay Mills" },
-    { "id": "egg",            "name": "Egg (large)",         "unit": "each", "unitPrice": 0.3400, "supplier": "Hill Butchery" },
-    { "id": "box-pizza-12",   "name": "12\" Pizza Box",      "unit": "each", "unitPrice": 0.2800, "supplier": "PackCo" }
+    {
+      "id": "flour-00",
+      "name": "00 Pizza Flour",
+      "unit": "g",
+      "unitPrice": 0.0021,
+      "supplier": "Bay Mills"
+    },
+    {
+      "id": "water",
+      "name": "Filtered Water",
+      "unit": "ml",
+      "unitPrice": 0.0001,
+      "supplier": "In-house"
+    },
+    {
+      "id": "yeast-fresh",
+      "name": "Fresh Yeast",
+      "unit": "g",
+      "unitPrice": 0.012,
+      "supplier": "Bay Mills"
+    },
+    {
+      "id": "salt-sea",
+      "name": "Fine Sea Salt",
+      "unit": "g",
+      "unitPrice": 0.003,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "oil-olive",
+      "name": "Extra Virgin Olive Oil",
+      "unit": "ml",
+      "unitPrice": 0.0145,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "tomato-san-marzano",
+      "name": "San Marzano Tomatoes",
+      "unit": "g",
+      "unitPrice": 0.0048,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "mozzarella-fdl",
+      "name": "Fior di Latte",
+      "unit": "g",
+      "unitPrice": 0.0132,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "basil-fresh",
+      "name": "Fresh Basil",
+      "unit": "g",
+      "unitPrice": 0.041,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "parmesan",
+      "name": "Parmigiano Reggiano",
+      "unit": "g",
+      "unitPrice": 0.0295,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "sausage-fennel",
+      "name": "Fennel Sausage",
+      "unit": "g",
+      "unitPrice": 0.0186,
+      "supplier": "Hill Butchery"
+    },
+    {
+      "id": "onion-red",
+      "name": "Red Onion",
+      "unit": "g",
+      "unitPrice": 0.0024,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "chili-flake",
+      "name": "Calabrian Chili Flake",
+      "unit": "g",
+      "unitPrice": 0.052,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "butter",
+      "name": "Unsalted Butter",
+      "unit": "g",
+      "unitPrice": 0.0094,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "sugar-granulated",
+      "name": "Granulated Sugar",
+      "unit": "g",
+      "unitPrice": 0.0016,
+      "supplier": "Bay Mills"
+    },
+    {
+      "id": "egg",
+      "name": "Egg (large)",
+      "unit": "each",
+      "unitPrice": 0.34,
+      "supplier": "Hill Butchery"
+    },
+    {
+      "id": "box-pizza-12",
+      "name": "12\" Pizza Box",
+      "unit": "each",
+      "unitPrice": 0.28,
+      "supplier": "PackCo"
+    },
+    {
+      "id": "coffee-beans",
+      "name": "Espresso Beans",
+      "unit": "g",
+      "unitPrice": 0.025,
+      "supplier": "Roast Collective"
+    },
+    {
+      "id": "milk-whole",
+      "name": "Whole Milk",
+      "unit": "ml",
+      "unitPrice": 0.0013,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "cream-heavy",
+      "name": "Heavy Cream",
+      "unit": "ml",
+      "unitPrice": 0.0038,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "cheddar",
+      "name": "Aged Cheddar",
+      "unit": "g",
+      "unitPrice": 0.0121,
+      "supplier": "Valley Dairy"
+    },
+    {
+      "id": "cocoa-powder",
+      "name": "Cocoa Powder",
+      "unit": "g",
+      "unitPrice": 0.018,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "tea-chai",
+      "name": "Chai Blend",
+      "unit": "g",
+      "unitPrice": 0.03,
+      "supplier": "Roast Collective"
+    },
+    {
+      "id": "tea-chamomile",
+      "name": "Chamomile Sachet",
+      "unit": "each",
+      "unitPrice": 0.22,
+      "supplier": "Roast Collective"
+    },
+    {
+      "id": "flour-ap",
+      "name": "All-Purpose Flour",
+      "unit": "g",
+      "unitPrice": 0.0014,
+      "supplier": "Bay Mills"
+    },
+    {
+      "id": "blueberry",
+      "name": "Blueberries",
+      "unit": "g",
+      "unitPrice": 0.0092,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "unit": "each",
+      "unitPrice": 0.32,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "apple",
+      "name": "Baking Apple",
+      "unit": "each",
+      "unitPrice": 0.55,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "lemon",
+      "name": "Lemon",
+      "unit": "each",
+      "unitPrice": 0.45,
+      "supplier": "Green Row"
+    },
+    {
+      "id": "cinnamon",
+      "name": "Ground Cinnamon",
+      "unit": "g",
+      "unitPrice": 0.034,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "stock-veg",
+      "name": "Vegetable Stock",
+      "unit": "ml",
+      "unitPrice": 0.0009,
+      "supplier": "Coastal Foods"
+    },
+    {
+      "id": "bread-sourdough",
+      "name": "Sourdough Slice",
+      "unit": "each",
+      "unitPrice": 0.38,
+      "supplier": "In-house"
+    },
+    {
+      "id": "cup-hot-12",
+      "name": "12oz Hot Cup",
+      "unit": "each",
+      "unitPrice": 0.14,
+      "supplier": "PackCo"
+    }
   ],
   "menuItems": [
     {
       "id": "pizza-margherita",
       "name": "Margherita",
       "category": "pizza",
-      "yield": { "quantity": 1, "unit": "each" },
-      "sellPrice": 15.0,
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 15,
       "ingredients": [
-        { "ingredientId": "flour-00",             "quantity": 250, "unit": "g",    "unitPrice": 0.0021, "lineCost": 0.53 },
-        { "ingredientId": "water",                "quantity": 163, "unit": "ml",   "unitPrice": 0.0001, "lineCost": 0.02 },
-        { "ingredientId": "yeast-fresh",          "quantity": 1,   "unit": "g",    "unitPrice": 0.0120, "lineCost": 0.01 },
-        { "ingredientId": "salt-sea",             "quantity": 7,   "unit": "g",    "unitPrice": 0.0030, "lineCost": 0.02 },
-        { "ingredientId": "tomato-san-marzano",   "quantity": 90,  "unit": "g",    "unitPrice": 0.0048, "lineCost": 0.43 },
-        { "ingredientId": "mozzarella-fdl",       "quantity": 125, "unit": "g",    "unitPrice": 0.0132, "lineCost": 1.65 },
-        { "ingredientId": "basil-fresh",          "quantity": 3,   "unit": "g",    "unitPrice": 0.0410, "lineCost": 0.12 },
-        { "ingredientId": "oil-olive",            "quantity": 8,   "unit": "ml",   "unitPrice": 0.0145, "lineCost": 0.12 },
-        { "ingredientId": "box-pizza-12",         "quantity": 1,   "unit": "each", "unitPrice": 0.2800, "lineCost": 0.28 }
+        {
+          "ingredientId": "flour-00",
+          "quantity": 250,
+          "unit": "g",
+          "unitPrice": 0.0021,
+          "lineCost": 0.53
+        },
+        {
+          "ingredientId": "water",
+          "quantity": 163,
+          "unit": "ml",
+          "unitPrice": 0.0001,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "yeast-fresh",
+          "quantity": 1,
+          "unit": "g",
+          "unitPrice": 0.012,
+          "lineCost": 0.01
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 7,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "tomato-san-marzano",
+          "quantity": 90,
+          "unit": "g",
+          "unitPrice": 0.0048,
+          "lineCost": 0.43
+        },
+        {
+          "ingredientId": "mozzarella-fdl",
+          "quantity": 125,
+          "unit": "g",
+          "unitPrice": 0.0132,
+          "lineCost": 1.65
+        },
+        {
+          "ingredientId": "basil-fresh",
+          "quantity": 3,
+          "unit": "g",
+          "unitPrice": 0.041,
+          "lineCost": 0.12
+        },
+        {
+          "ingredientId": "oil-olive",
+          "quantity": 8,
+          "unit": "ml",
+          "unitPrice": 0.0145,
+          "lineCost": 0.12
+        },
+        {
+          "ingredientId": "box-pizza-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.28,
+          "lineCost": 0.28
+        }
       ],
       "totalCost": 3.18
     },
@@ -42,53 +307,805 @@
       "id": "pizza-diavola",
       "name": "Diavola",
       "category": "pizza",
-      "yield": { "quantity": 1, "unit": "each" },
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
       "sellPrice": 18.5,
       "ingredients": [
-        { "ingredientId": "flour-00",           "quantity": 250, "unit": "g",    "unitPrice": 0.0021, "lineCost": 0.53 },
-        { "ingredientId": "water",              "quantity": 163, "unit": "ml",   "unitPrice": 0.0001, "lineCost": 0.02 },
-        { "ingredientId": "yeast-fresh",        "quantity": 1,   "unit": "g",    "unitPrice": 0.0120, "lineCost": 0.01 },
-        { "ingredientId": "salt-sea",           "quantity": 7,   "unit": "g",    "unitPrice": 0.0030, "lineCost": 0.02 },
-        { "ingredientId": "tomato-san-marzano", "quantity": 90,  "unit": "g",    "unitPrice": 0.0048, "lineCost": 0.43 },
-        { "ingredientId": "mozzarella-fdl",     "quantity": 110, "unit": "g",    "unitPrice": 0.0132, "lineCost": 1.45 },
-        { "ingredientId": "sausage-fennel",     "quantity": 70,  "unit": "g",    "unitPrice": 0.0186, "lineCost": 1.30 },
-        { "ingredientId": "onion-red",          "quantity": 25,  "unit": "g",    "unitPrice": 0.0024, "lineCost": 0.06 },
-        { "ingredientId": "chili-flake",        "quantity": 2,   "unit": "g",    "unitPrice": 0.0520, "lineCost": 0.10 },
-        { "ingredientId": "box-pizza-12",       "quantity": 1,   "unit": "each", "unitPrice": 0.2800, "lineCost": 0.28 }
+        {
+          "ingredientId": "flour-00",
+          "quantity": 250,
+          "unit": "g",
+          "unitPrice": 0.0021,
+          "lineCost": 0.53
+        },
+        {
+          "ingredientId": "water",
+          "quantity": 163,
+          "unit": "ml",
+          "unitPrice": 0.0001,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "yeast-fresh",
+          "quantity": 1,
+          "unit": "g",
+          "unitPrice": 0.012,
+          "lineCost": 0.01
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 7,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "tomato-san-marzano",
+          "quantity": 90,
+          "unit": "g",
+          "unitPrice": 0.0048,
+          "lineCost": 0.43
+        },
+        {
+          "ingredientId": "mozzarella-fdl",
+          "quantity": 110,
+          "unit": "g",
+          "unitPrice": 0.0132,
+          "lineCost": 1.45
+        },
+        {
+          "ingredientId": "sausage-fennel",
+          "quantity": 70,
+          "unit": "g",
+          "unitPrice": 0.0186,
+          "lineCost": 1.3
+        },
+        {
+          "ingredientId": "onion-red",
+          "quantity": 25,
+          "unit": "g",
+          "unitPrice": 0.0024,
+          "lineCost": 0.06
+        },
+        {
+          "ingredientId": "chili-flake",
+          "quantity": 2,
+          "unit": "g",
+          "unitPrice": 0.052,
+          "lineCost": 0.1
+        },
+        {
+          "ingredientId": "box-pizza-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.28,
+          "lineCost": 0.28
+        }
       ],
-      "totalCost": 4.20
+      "totalCost": 4.2
     },
     {
       "id": "focaccia-rosemary",
       "name": "Rosemary Focaccia (tray)",
       "category": "bread",
-      "yield": { "quantity": 12, "unit": "each" },
+      "yield": {
+        "quantity": 12,
+        "unit": "each"
+      },
       "sellPrice": 4.5,
       "ingredients": [
-        { "ingredientId": "flour-00",  "quantity": 1000, "unit": "g",  "unitPrice": 0.0021, "lineCost": 2.10 },
-        { "ingredientId": "water",     "quantity": 800,  "unit": "ml", "unitPrice": 0.0001, "lineCost": 0.08 },
-        { "ingredientId": "yeast-fresh", "quantity": 10, "unit": "g",  "unitPrice": 0.0120, "lineCost": 0.12 },
-        { "ingredientId": "salt-sea",  "quantity": 20,   "unit": "g",  "unitPrice": 0.0030, "lineCost": 0.06 },
-        { "ingredientId": "oil-olive", "quantity": 120,  "unit": "ml", "unitPrice": 0.0145, "lineCost": 1.74 }
+        {
+          "ingredientId": "flour-00",
+          "quantity": 1000,
+          "unit": "g",
+          "unitPrice": 0.0021,
+          "lineCost": 2.1
+        },
+        {
+          "ingredientId": "water",
+          "quantity": 800,
+          "unit": "ml",
+          "unitPrice": 0.0001,
+          "lineCost": 0.08
+        },
+        {
+          "ingredientId": "yeast-fresh",
+          "quantity": 10,
+          "unit": "g",
+          "unitPrice": 0.012,
+          "lineCost": 0.12
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.06
+        },
+        {
+          "ingredientId": "oil-olive",
+          "quantity": 120,
+          "unit": "ml",
+          "unitPrice": 0.0145,
+          "lineCost": 1.74
+        }
       ],
-      "totalCost": 4.10,
+      "totalCost": 4.1,
       "costPerServing": 0.34
     },
     {
       "id": "cookie-brown-butter",
       "name": "Brown Butter Cookie",
       "category": "pastry",
-      "yield": { "quantity": 24, "unit": "each" },
+      "yield": {
+        "quantity": 24,
+        "unit": "each"
+      },
       "sellPrice": 3.75,
       "ingredients": [
-        { "ingredientId": "flour-00",          "quantity": 540, "unit": "g",    "unitPrice": 0.0021, "lineCost": 1.13 },
-        { "ingredientId": "butter",            "quantity": 340, "unit": "g",    "unitPrice": 0.0094, "lineCost": 3.20 },
-        { "ingredientId": "sugar-granulated",  "quantity": 400, "unit": "g",    "unitPrice": 0.0016, "lineCost": 0.64 },
-        { "ingredientId": "egg",               "quantity": 2,   "unit": "each", "unitPrice": 0.3400, "lineCost": 0.68 },
-        { "ingredientId": "salt-sea",          "quantity": 8,   "unit": "g",    "unitPrice": 0.0030, "lineCost": 0.02 }
+        {
+          "ingredientId": "flour-00",
+          "quantity": 540,
+          "unit": "g",
+          "unitPrice": 0.0021,
+          "lineCost": 1.13
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 340,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 3.2
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 400,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.64
+        },
+        {
+          "ingredientId": "egg",
+          "quantity": 2,
+          "unit": "each",
+          "unitPrice": 0.34,
+          "lineCost": 0.68
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 8,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.02
+        }
       ],
       "totalCost": 5.67,
       "costPerServing": 0.24
+    },
+    {
+      "id": "drink-flat-white",
+      "name": "Flat White",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 4.75,
+      "ingredients": [
+        {
+          "ingredientId": "coffee-beans",
+          "quantity": 18,
+          "unit": "g",
+          "unitPrice": 0.025,
+          "lineCost": 0.45
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 160,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.21
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.8
+    },
+    {
+      "id": "drink-cappuccino",
+      "name": "Cappuccino",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 4.5,
+      "ingredients": [
+        {
+          "ingredientId": "coffee-beans",
+          "quantity": 18,
+          "unit": "g",
+          "unitPrice": 0.025,
+          "lineCost": 0.45
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 150,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.19
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.78
+    },
+    {
+      "id": "drink-hot-chocolate",
+      "name": "Hot Chocolate",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 4.25,
+      "ingredients": [
+        {
+          "ingredientId": "cocoa-powder",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.018,
+          "lineCost": 0.36
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 240,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.31
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 15,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.83
+    },
+    {
+      "id": "drink-chai-latte",
+      "name": "Chai Latte",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 4.75,
+      "ingredients": [
+        {
+          "ingredientId": "tea-chai",
+          "quantity": 8,
+          "unit": "g",
+          "unitPrice": 0.03,
+          "lineCost": 0.24
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 200,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.26
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 10,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.02
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.66
+    },
+    {
+      "id": "drink-chamomile-tea",
+      "name": "Chamomile Tea",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 3.25,
+      "ingredients": [
+        {
+          "ingredientId": "tea-chamomile",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.22,
+          "lineCost": 0.22
+        },
+        {
+          "ingredientId": "water",
+          "quantity": 250,
+          "unit": "ml",
+          "unitPrice": 0.0001,
+          "lineCost": 0.03
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.39
+    },
+    {
+      "id": "drink-lemonade",
+      "name": "Lemonade",
+      "category": "drink",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 3.75,
+      "ingredients": [
+        {
+          "ingredientId": "lemon",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.45,
+          "lineCost": 0.45
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 25,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.04
+        },
+        {
+          "ingredientId": "water",
+          "quantity": 280,
+          "unit": "ml",
+          "unitPrice": 0.0001,
+          "lineCost": 0.03
+        },
+        {
+          "ingredientId": "cup-hot-12",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.14,
+          "lineCost": 0.14
+        }
+      ],
+      "totalCost": 0.66
+    },
+    {
+      "id": "pastry-croissant",
+      "name": "Butter Croissant",
+      "category": "pastry",
+      "yield": {
+        "quantity": 12,
+        "unit": "each"
+      },
+      "sellPrice": 4.25,
+      "ingredients": [
+        {
+          "ingredientId": "flour-ap",
+          "quantity": 1000,
+          "unit": "g",
+          "unitPrice": 0.0014,
+          "lineCost": 1.4
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 500,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 4.7
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 300,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.39
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 80,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.13
+        },
+        {
+          "ingredientId": "yeast-fresh",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.012,
+          "lineCost": 0.24
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.06
+        },
+        {
+          "ingredientId": "egg",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.34,
+          "lineCost": 0.34
+        }
+      ],
+      "totalCost": 7.26,
+      "costPerServing": 0.61
+    },
+    {
+      "id": "pastry-blueberry-scone",
+      "name": "Blueberry Scone",
+      "category": "pastry",
+      "yield": {
+        "quantity": 8,
+        "unit": "each"
+      },
+      "sellPrice": 4,
+      "ingredients": [
+        {
+          "ingredientId": "flour-ap",
+          "quantity": 480,
+          "unit": "g",
+          "unitPrice": 0.0014,
+          "lineCost": 0.67
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 170,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 1.6
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 90,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.14
+        },
+        {
+          "ingredientId": "blueberry",
+          "quantity": 200,
+          "unit": "g",
+          "unitPrice": 0.0092,
+          "lineCost": 1.84
+        },
+        {
+          "ingredientId": "cream-heavy",
+          "quantity": 180,
+          "unit": "ml",
+          "unitPrice": 0.0038,
+          "lineCost": 0.68
+        },
+        {
+          "ingredientId": "egg",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.34,
+          "lineCost": 0.34
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 5,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.02
+        }
+      ],
+      "totalCost": 5.29,
+      "costPerServing": 0.66
+    },
+    {
+      "id": "pastry-banana-bread",
+      "name": "Banana Bread",
+      "category": "pastry",
+      "yield": {
+        "quantity": 10,
+        "unit": "each"
+      },
+      "sellPrice": 3.75,
+      "ingredients": [
+        {
+          "ingredientId": "flour-ap",
+          "quantity": 300,
+          "unit": "g",
+          "unitPrice": 0.0014,
+          "lineCost": 0.42
+        },
+        {
+          "ingredientId": "banana",
+          "quantity": 3,
+          "unit": "each",
+          "unitPrice": 0.32,
+          "lineCost": 0.96
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 115,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 1.08
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 150,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.24
+        },
+        {
+          "ingredientId": "egg",
+          "quantity": 2,
+          "unit": "each",
+          "unitPrice": 0.34,
+          "lineCost": 0.68
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 4,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.01
+        }
+      ],
+      "totalCost": 3.39,
+      "costPerServing": 0.34
+    },
+    {
+      "id": "pastry-cinnamon-roll",
+      "name": "Cinnamon Roll",
+      "category": "pastry",
+      "yield": {
+        "quantity": 12,
+        "unit": "each"
+      },
+      "sellPrice": 4.5,
+      "ingredients": [
+        {
+          "ingredientId": "flour-ap",
+          "quantity": 700,
+          "unit": "g",
+          "unitPrice": 0.0014,
+          "lineCost": 0.98
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 150,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 1.41
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 160,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.26
+        },
+        {
+          "ingredientId": "cinnamon",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.034,
+          "lineCost": 0.68
+        },
+        {
+          "ingredientId": "milk-whole",
+          "quantity": 300,
+          "unit": "ml",
+          "unitPrice": 0.0013,
+          "lineCost": 0.39
+        },
+        {
+          "ingredientId": "yeast-fresh",
+          "quantity": 14,
+          "unit": "g",
+          "unitPrice": 0.012,
+          "lineCost": 0.17
+        },
+        {
+          "ingredientId": "egg",
+          "quantity": 1,
+          "unit": "each",
+          "unitPrice": 0.34,
+          "lineCost": 0.34
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 8,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.02
+        }
+      ],
+      "totalCost": 4.25,
+      "costPerServing": 0.35
+    },
+    {
+      "id": "pastry-apple-pie",
+      "name": "Apple Pie Slice",
+      "category": "pastry",
+      "yield": {
+        "quantity": 8,
+        "unit": "each"
+      },
+      "sellPrice": 5,
+      "ingredients": [
+        {
+          "ingredientId": "flour-ap",
+          "quantity": 400,
+          "unit": "g",
+          "unitPrice": 0.0014,
+          "lineCost": 0.56
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 250,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 2.35
+        },
+        {
+          "ingredientId": "apple",
+          "quantity": 6,
+          "unit": "each",
+          "unitPrice": 0.55,
+          "lineCost": 3.3
+        },
+        {
+          "ingredientId": "sugar-granulated",
+          "quantity": 140,
+          "unit": "g",
+          "unitPrice": 0.0016,
+          "lineCost": 0.22
+        },
+        {
+          "ingredientId": "cinnamon",
+          "quantity": 6,
+          "unit": "g",
+          "unitPrice": 0.034,
+          "lineCost": 0.2
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 4,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.01
+        }
+      ],
+      "totalCost": 6.64,
+      "costPerServing": 0.83
+    },
+    {
+      "id": "side-tomato-soup",
+      "name": "Tomato Soup",
+      "category": "side",
+      "yield": {
+        "quantity": 6,
+        "unit": "each"
+      },
+      "sellPrice": 6.5,
+      "ingredients": [
+        {
+          "ingredientId": "tomato-san-marzano",
+          "quantity": 1200,
+          "unit": "g",
+          "unitPrice": 0.0048,
+          "lineCost": 5.76
+        },
+        {
+          "ingredientId": "onion-red",
+          "quantity": 200,
+          "unit": "g",
+          "unitPrice": 0.0024,
+          "lineCost": 0.48
+        },
+        {
+          "ingredientId": "stock-veg",
+          "quantity": 900,
+          "unit": "ml",
+          "unitPrice": 0.0009,
+          "lineCost": 0.81
+        },
+        {
+          "ingredientId": "cream-heavy",
+          "quantity": 120,
+          "unit": "ml",
+          "unitPrice": 0.0038,
+          "lineCost": 0.46
+        },
+        {
+          "ingredientId": "oil-olive",
+          "quantity": 30,
+          "unit": "ml",
+          "unitPrice": 0.0145,
+          "lineCost": 0.44
+        },
+        {
+          "ingredientId": "salt-sea",
+          "quantity": 12,
+          "unit": "g",
+          "unitPrice": 0.003,
+          "lineCost": 0.04
+        }
+      ],
+      "totalCost": 7.99,
+      "costPerServing": 1.33
+    },
+    {
+      "id": "side-grilled-cheese",
+      "name": "Grilled Cheese",
+      "category": "side",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 7.5,
+      "ingredients": [
+        {
+          "ingredientId": "bread-sourdough",
+          "quantity": 2,
+          "unit": "each",
+          "unitPrice": 0.38,
+          "lineCost": 0.76
+        },
+        {
+          "ingredientId": "cheddar",
+          "quantity": 70,
+          "unit": "g",
+          "unitPrice": 0.0121,
+          "lineCost": 0.85
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 20,
+          "unit": "g",
+          "unitPrice": 0.0094,
+          "lineCost": 0.19
+        }
+      ],
+      "totalCost": 1.8
     }
   ]
 }
