@@ -2,33 +2,41 @@
 
 import { revalidatePath } from "next/cache";
 import { addMenuItem, readCatalog, round2 } from "@/lib/catalog";
-import type {
-  MenuItem,
-  MenuItemCategory,
-  MenuItemIngredient,
-  Unit,
-} from "@/lib/types";
+import type { Ingredient, MenuItem, MenuItemIngredient, Unit } from "@/lib/types";
 
-export type NewRecipeInput = {
+export type NewRecipeLine = {
   name: string;
-  category: MenuItemCategory;
-  yieldQuantity: number;
-  yieldUnit: Unit;
-  sellPrice: number;
-  lines: { ingredientId: string; quantity: number }[];
+  quantity: number;
+  unit: Unit;
 };
 
-export async function createMenuItem(input: NewRecipeInput) {
+export async function createMenuItem(input: { name: string; lines: NewRecipeLine[] }) {
   const name = input.name.trim();
-  if (!name) return { ok: false as const, error: "Give the menu item a name." };
+  if (!name) return { ok: false as const, error: "Give the recipe a name." };
 
   const catalog = await readCatalog();
-  const byId = new Map(catalog.ingredients.map((i) => [i.id, i]));
-
+  const known = [...catalog.ingredients];
+  const created: Ingredient[] = [];
   const ingredients: MenuItemIngredient[] = [];
+
   for (const line of input.lines) {
-    const ingredient = byId.get(line.ingredientId);
-    if (!ingredient || !(line.quantity > 0)) continue;
+    const ingredientName = line.name.trim();
+    if (!ingredientName || !(line.quantity > 0)) continue;
+
+    let ingredient = known.find(
+      (item) => item.name.toLowerCase() === ingredientName.toLowerCase(),
+    );
+    if (!ingredient) {
+      ingredient = {
+        id: `${slug(ingredientName)}-${created.length}-${Date.now().toString(36)}`,
+        name: ingredientName,
+        unit: line.unit,
+        unitPrice: 0,
+      };
+      known.push(ingredient);
+      created.push(ingredient);
+    }
+
     ingredients.push({
       ingredientId: ingredient.id,
       quantity: line.quantity,
@@ -42,23 +50,25 @@ export async function createMenuItem(input: NewRecipeInput) {
     return { ok: false as const, error: "Add at least one ingredient." };
   }
 
-  const totalCost = round2(ingredients.reduce((sum, i) => sum + i.lineCost, 0));
-  const yieldQuantity = Math.max(1, input.yieldQuantity);
-
+  const totalCost = round2(ingredients.reduce((sum, line) => sum + line.lineCost, 0));
   const item: MenuItem = {
-    id: `${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}-${Date.now().toString(36)}`,
+    id: `${slug(name)}-${Date.now().toString(36)}`,
     name,
-    category: input.category,
-    yield: { quantity: yieldQuantity, unit: input.yieldUnit },
-    sellPrice: input.sellPrice,
+    category: "pastry",
+    yield: { quantity: 1, unit: "each" },
+    sellPrice: 0,
     ingredients,
     totalCost,
-    ...(yieldQuantity > 1
-      ? { costPerServing: round2(totalCost / yieldQuantity) }
-      : {}),
   };
 
-  await addMenuItem(item);
+  await addMenuItem(item, created);
   revalidatePath("/recipe-builder");
   return { ok: true as const, name: item.name };
+}
+
+function slug(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }

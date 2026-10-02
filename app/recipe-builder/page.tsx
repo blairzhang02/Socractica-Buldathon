@@ -11,7 +11,7 @@ const categoryFill: Record<string, string> = {
 };
 
 export default async function Page() {
-  const { currency, ingredients, menuItems } = await readCatalog();
+  const { currency, menuItems } = await readCatalog();
 
   const money = (n: number) =>
     `${currency} ${n.toLocaleString(undefined, {
@@ -23,10 +23,10 @@ export default async function Page() {
     <>
       <PageHeader
         title="Recipe builder"
-        description="Build a menu item from catalog ingredients and see what it costs you."
+        description="Name the recipe, then type each ingredient and how much it uses."
       />
 
-      <RecipeForm ingredients={ingredients} currency={currency} />
+      <RecipeForm />
 
       <h2 className="mt-12 text-lg font-semibold text-chocolate-900">
         Costed menu ({menuItems.length})
