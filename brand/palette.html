@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Making Dough — Colour Theme</title>
+<style>
+  :root{
+    --choc-900:#4A1B16; --choc-800:#63231D; --choc-700:#6D2723;
+    --choc-600:#802824; --choc-500:#AD634E;
+    --cream-50:#FCF5EB; --cream-100:#F9EDDE; --cream-200:#F7E3CE; --cream-300:#EEDCC4;
+    --taupe:#987A64; --periwinkle:#B1BED8;
+    --tan:#EBB084; --tangerine:#F9922D; --honey:#F9BD45; --custard:#FCD058;
+    --berry:#EF4F3F; --rose:#E37C81; --lime:#B8BC1F; --matcha:#D8D593; --blueberry:#618EC2;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:0 16px 80px;
+    background:var(--cream-50); color:var(--choc-900);
+    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .wrap{max-width:1000px;margin:0 auto}
+  header{padding:56px 0 8px;border-bottom:3px solid var(--choc-700);margin-bottom:40px}
+  h1{font-size:clamp(28px,5vw,42px);margin:0 0 8px;letter-spacing:-.02em}
+  .sub{margin:0 0 24px;color:var(--choc-600);max-width:60ch}
+  h2{font-size:22px;margin:48px 0 4px;letter-spacing:-.01em}
+  .note{margin:0 0 20px;color:var(--taupe);font-size:14px;max-width:65ch}
+  code{background:var(--cream-200);padding:1px 5px;border-radius:4px;font-size:13px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .sw{border:none;padding:0;background:none;font:inherit;text-align:left;cursor:pointer;
+      border-radius:12px;overflow:hidden;box-shadow:0 1px 0 rgba(74,27,22,.18);transition:transform .12s}
+  .sw:hover{transform:translateY(-3px)}
+  .chip{height:92px;border-bottom:1px solid rgba(74,27,22,.12)}
+  .meta{background:var(--cream-100);padding:10px 12px}
+  .nm{display:block;font-weight:600;font-size:14px}
+  .hx{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:12.5px;color:var(--choc-600);text-transform:uppercase}
+  table{width:100%;border-collapse:collapse;margin:8px 0 0;font-size:14.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--cream-300)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--taupe)}
+  .pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:700}
+  .ok{background:#DBEBD4;color:#2B5120}.mid{background:var(--honey);color:var(--choc-900)}
+  .no{background:#F7D3CE;color:#8A2016}
+  pre{background:var(--choc-900);color:var(--cream-100);padding:18px;border-radius:12px;
+      overflow:auto;font-size:13px;line-height:1.55;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .demo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:8px}
+  .card{border-radius:14px;padding:18px;background:var(--cream-100);border:1px solid var(--cream-300)}
+  .card h3{margin:0 0 6px;font-size:15px}
+  .card p{margin:0;font-size:13.5px;color:var(--choc-600)}
+  .btn{display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;
+       background:var(--choc-700);color:var(--cream-100);font-size:13px;font-weight:600}
+  .btn.alt{background:var(--custard);color:var(--choc-900)}
+  .tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;margin:0 4px 4px 0}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--cream-300);
+         font-size:13px;color:var(--taupe)}
+  #toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,24px);opacity:0;
+         background:var(--choc-900);color:var(--cream-100);padding:9px 18px;border-radius:999px;
+         font-size:14px;transition:.18s;pointer-events:none}
+  #toast.on{opacity:1;transform:translate(-50%,0)}
+  @media print{.sw:hover{transform:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Making Dough — Colour Theme</h1>
+  <p class="sub">Sampled directly from the Socratica &times; Ramp buildathon bakery artwork.
+  Every hex below was pulled from the pixels of that image, not approximated by eye.
+  Click any swatch to copy its hex.</p>
+</header>
+
+<h2>Chocolate — the structural colour</h2>
+<p class="note">The stall frame, awning and hand-lettering. This is the backbone of the theme: use it for
+text, headers, nav bars and borders. Dark enough to carry body copy at AAA contrast on any cream.</p>
+<div class="grid" id="g-choc"></div>
+
+<h2>Cream — surfaces</h2>
+<p class="note">The paper background and the signboard. These are your page and card backgrounds.
+Never put cream text on cream.</p>
+<div class="grid" id="g-cream"></div>
+
+<h2>Pastry case — accents</h2>
+<p class="note">The sweets, the cards, the cherries. Bright, warm and saturated. These are
+<strong>fills and highlights</strong> — chart series, tags, badges, illustrations — not text colours.
+See the contrast table below.</p>
+<div class="grid" id="g-accent"></div>
+
+<h2>Text-safe accent inks</h2>
+<p class="note">Darkened versions of each accent, tuned until they clear WCAG AA (4.5:1) on cream.
+Use these whenever an accent needs to be <em>readable</em> rather than decorative.</p>
+<div class="grid" id="g-ink"></div>
+
+<h2>Contrast, measured</h2>
+<p class="note">Ratios against cream <code>#F9EDDE</code>, computed with the WCAG 2.1 formula.</p>
+<table>
+  <thead><tr><th>Pairing</th><th>Ratio</th><th>Verdict</th><th>Use for</th></tr></thead>
+  <tbody id="tbl"></tbody>
+</table>
+
+<h2>In context</h2>
+<div class="demo">
+  <div class="card">
+    <h3>Order #1042</h3>
+    <p>12 items &middot; received Tuesday</p>
+    <span class="btn">View order</span>
+  </div>
+  <div class="card" style="background:var(--choc-700);border-color:var(--choc-800)">
+    <h3 style="color:var(--cream-100)">Low stock</h3>
+    <p style="color:var(--cream-200)">4 ingredients below par level</p>
+    <span class="btn alt">Restock now</span>
+  </div>
+  <div class="card">
+    <h3>Status tags</h3>
+    <p style="margin-bottom:10px">Accent fills, chocolate text</p>
+    <span class="tag" style="background:var(--custard)">Draft</span>
+    <span class="tag" style="background:var(--matcha)">Received</span>
+    <span class="tag" style="background:var(--tan)">Placed</span>
+    <span class="tag" style="background:var(--rose);color:var(--choc-900)">Cancelled</span>
+  </div>
+</div>
+
+<h2>Drop-in tokens</h2>
+<p class="note">Tailwind v4 — paste into <code>app/globals.css</code>, either inside the existing
+<code>@theme inline</code> block or as its own <code>@theme</code>.</p>
+<pre id="css"></pre>
+
+<h2>Plain CSS variables</h2>
+<pre id="vars"></pre>
+
+<h2>JSON</h2>
+<pre id="json"></pre>
+
+<footer>
+  Colours sampled from the Making Dough buildathon artwork (Socratica, in partnership with Ramp).
+  Contrast ratios calculated per WCAG 2.1. Click any swatch to copy.
+</footer>
+
+</div>
+<div id="toast">Copied</div>
+
+<script>
+const groups = {
+ "g-choc":[
+  ["chocolate-900","#4A1B16","deepest shadow"],
+  ["chocolate-800","#63231D","lettering"],
+  ["chocolate-700","#6D2723","shelf / primary"],
+  ["chocolate-600","#802824","awning"],
+  ["chocolate-500","#AD634E","warm mid-brown"],
+  ["taupe","#987A64","floorboards"]],
+ "g-cream":[
+  ["cream-50","#FCF5EB","page background"],
+  ["cream-100","#F9EDDE","card surface"],
+  ["cream-200","#F7E3CE","signboard"],
+  ["cream-300","#EEDCC4","borders / rules"]],
+ "g-accent":[
+  ["tan","#EBB084","croissant"],
+  ["tangerine","#F9922D","orange card"],
+  ["honey","#F9BD45","amber card"],
+  ["custard","#FCD058","pudding"],
+  ["berry","#EF4F3F","cherry"],
+  ["rose","#E37C81","pink macaron"],
+  ["lime","#B8BC1F","ramp card"],
+  ["matcha","#D8D593","green macaron"],
+  ["blueberry","#618EC2","blue card"],
+  ["periwinkle","#B1BED8","dough mascot"]],
+ "g-ink":[
+  ["ink-berry","#D02311","readable berry"],
+  ["ink-rose","#CD2C34","readable rose"],
+  ["ink-tangerine","#A75505","readable tangerine"],
+  ["ink-honey","#916205","readable honey"],
+  ["ink-custard","#8B6602","readable custard"],
+  ["ink-lime","#6B6D12","readable lime"],
+  ["ink-blueberry","#406FA6","readable blueberry"],
+  ["ink-tan","#A7571B","readable tan"]]
+};
+
+for (const [id, list] of Object.entries(groups)) {
+  document.getElementById(id).innerHTML = list.map(([n,h,d]) => `
+    <button class="sw" data-hex="${h}">
+      <div class="chip" style="background:${h}"></div>
+      <div class="meta"><span class="nm">${n}</span><span class="hx">${h}</span>
+      ${d ? `<span class="hx" style="text-transform:none;color:var(--taupe)">${d}</span>` : ""}</div>
+    </button>`).join("");
+}
+
+const rows = [
+ ["chocolate-900 text","12.47","AAA","Headings, body copy"],
+ ["chocolate-700 text","9.26","AAA","Default text, nav, borders"],
+ ["chocolate-600 text","8.10","AAA","Secondary text"],
+ ["chocolate-500 text","3.90","AA-large","Headings 24px+ only"],
+ ["taupe text","3.43","AA-large","Muted labels 24px+, or icons"],
+ ["cream-100 on chocolate-700","9.26","AAA","Inverted bars, dark cards"],
+ ["custard on chocolate-700","7.28","AAA","Primary button on dark"],
+ ["chocolate-700 on custard","7.28","AAA","Primary button on light"],
+ ["chocolate-700 on tan","5.64","AA","Tags, chips"],
+ ["berry as text","3.11","AA-large","Fill only — use ink-berry"],
+ ["blueberry as text","2.96","FAIL","Fill only — use ink-blueberry"],
+ ["rose as text","2.44","FAIL","Fill only — use ink-rose"],
+ ["tangerine as text","1.98","FAIL","Fill only — use ink-tangerine"],
+ ["lime as text","1.78","FAIL","Fill only — use ink-lime"],
+ ["honey as text","1.47","FAIL","Fill only — use ink-honey"]
+];
+document.getElementById("tbl").innerHTML = rows.map(([a,b,c,d]) => {
+  const cls = (c === "AAA" || c === "AA") ? "ok" : (c === "AA-large" ? "mid" : "no");
+  return `<tr><td>${a}</td><td>${b}:1</td><td><span class="pill ${cls}">${c}</span></td><td>${d}</td></tr>`;
+}).join("");
+
+const all = Object.values(groups).flat();
+document.getElementById("css").textContent =
+  "@theme {\n" + all.map(([n,h]) => `  --color-${n}: ${h};`).join("\n") + "\n}";
+document.getElementById("vars").textContent =
+  ":root {\n" + all.map(([n,h]) => `  --${n}: ${h};`).join("\n") + "\n}";
+document.getElementById("json").textContent =
+  JSON.stringify(Object.fromEntries(all.map(([n,h]) => [n,h])), null, 2);
+
+const toast = document.getElementById("toast");
+let timer;
+document.addEventListener("click", e => {
+  const b = e.target.closest(".sw");
+  if (!b) return;
+  const hex = b.dataset.hex;
+  navigator.clipboard?.writeText(hex).then(() => {
+    toast.textContent = "Copied " + hex;
+    toast.classList.add("on");
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove("on"), 1300);
+  });
+});
+</script>
+</body>
+</html>
