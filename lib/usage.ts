@@ -89,6 +89,77 @@ export function ingredientUsage(
     .sort((a, b) => b.amount - a.amount);
 }
 
+export type StockRow = {
+  name: string;
+  icon: string;
+  group: UsageGroup;
+  /** On hand from invoices, in `unit`. */
+  had: number;
+  /** What's left after orders, in `unit`. Negative means she used more than she bought. */
+  left: number;
+  unit: Unit;
+};
+
+const words = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+/** Same ingredient even when the invoice name and the recipe name aren't identical. */
+function matchingUsage(name: string, usage: IngredientUsage[]) {
+  const invoice = words(name);
+  const exact = usage.find((row) => words(row.name) === invoice);
+  if (exact) return exact;
+
+  const close = usage.filter((row) => {
+    const recipe = words(row.name);
+    return recipe.includes(invoice) || invoice.includes(recipe);
+  });
+  close.sort((a, b) => words(a.name).length - words(b.name).length);
+  return close[0];
+}
+
+const weighed = (unit: Unit) => unit === "g" || unit === "kg";
+const poured = (unit: Unit) => unit === "ml" || unit === "l";
+
+const sameMeasure = (a: Unit, b: Unit) =>
+  (weighed(a) && weighed(b)) || (poured(a) && poured(b)) || (a === "each" && b === "each");
+
+/** Grams, millilitres, or each — so 3 kg and 400 g can be subtracted. */
+function asBase(amount: number, unit: Unit): { amount: number; unit: Unit } {
+  if (unit === "kg") return { amount: amount * 1000, unit: "g" };
+  if (unit === "l") return { amount: amount * 1000, unit: "ml" };
+  return { amount, unit };
+}
+
+/**
+ * Each invoice line, with orders taken off. "Had" is what she bought.
+ * "Left" is that amount minus what the orders used.
+ */
+export function stockAfterUse(
+  items: { name: string; quantity: number; unit: Unit }[],
+  usage: IngredientUsage[],
+): StockRow[] {
+  return items.map((item) => {
+    const had = asBase(item.quantity, item.unit);
+    const match = matchingUsage(item.name, usage);
+    const used =
+      match && sameMeasure(item.unit, match.unit)
+        ? asBase(match.amount, match.unit).amount
+        : 0;
+
+    return {
+      name: item.name,
+      icon: match?.icon ?? FALLBACK_ICON,
+      group: groupOf(had.unit),
+      had: had.amount,
+      left: had.amount - used,
+      unit: had.unit,
+    };
+  });
+}
+
 /** Plain-language amount: big units when the number would get long. */
 export function formatAmount(amount: number, unit: Unit): string {
   if (unit === "g" || unit === "kg") {

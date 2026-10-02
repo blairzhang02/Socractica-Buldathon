@@ -4,7 +4,7 @@ import Link from "next/link";
 // Every other screen gets a "Back to menu" button from app/_components/home-bar.
 
 type Destination = {
-  href: "/orders" | "/analytics" | "/restock" | "/recipe-builder" | "/inventory";
+  href: "/orders" | "/analytics" | "/restock" | "/recipe-builder";
   icon: string;
   label: string;
   blurb: string;
@@ -23,7 +23,7 @@ const destinations: Destination[] = [
     href: "/analytics",
     icon: "🥣",
     label: "Supply",
-    blurb: "See what has been used up",
+    blurb: "Add invoices and see what's left",
     tile: "bg-matcha hover:bg-lime",
   },
   {
@@ -39,13 +39,6 @@ const destinations: Destination[] = [
     label: "Recipes",
     blurb: "Add and edit recipes",
     tile: "bg-periwinkle hover:bg-blueberry",
-  },
-  {
-    href: "/inventory",
-    icon: "📦",
-    label: "Inventory",
-    blurb: "Add invoices and see what's on hand",
-    tile: "bg-rose hover:bg-berry",
   },
 ];
 

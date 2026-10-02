@@ -4,18 +4,20 @@ import {
   UsageView,
   type UsagePeriod,
 } from "@/app/analytics/_components/usage-view";
+import { ReceiptForm } from "@/app/inventory/_components/receipt-form";
 import { readCatalog } from "@/lib/catalog";
 import { pastOrders } from "@/lib/data/past-orders";
-import { ingredientUsage, ordersInLastDays } from "@/lib/usage";
+import { inventoryFromReceipts, readReceipts } from "@/lib/receipts";
+import { ingredientUsage, ordersInLastDays, stockAfterUse } from "@/lib/usage";
 
 // Owner: TBD
-// How much of each ingredient the orders in lib/data/past-orders.ts consumed,
-// costed out of the recipes in lib/data/menu-items.json.
+// Invoices say what she bought. Orders say what was used. Each line shows both.
 
 const plural = (count: number) => (count === 1 ? "order" : "orders");
 
 export default async function Page() {
   const catalog = await readCatalog();
+  const onHand = inventoryFromReceipts(await readReceipts());
 
   const today = ordersInLastDays(pastOrders, 1);
   const week = ordersInLastDays(pastOrders, 7);
@@ -24,24 +26,27 @@ export default async function Page() {
     {
       id: "today",
       label: "Today",
-      summary: `From ${today.length} ${plural(today.length)} today.`,
-      usage: ingredientUsage(today, catalog),
+      summary: `After ${today.length} ${plural(today.length)} today.`,
+      stock: stockAfterUse(onHand, ingredientUsage(today, catalog)),
     },
     {
       id: "week",
       label: "This week",
-      summary: `From ${week.length} ${plural(week.length)} over the last 7 days.`,
-      usage: ingredientUsage(week, catalog),
+      summary: `After ${week.length} ${plural(week.length)} over the last 7 days.`,
+      stock: stockAfterUse(onHand, ingredientUsage(week, catalog)),
     },
   ];
 
   return (
     <Screen>
       <PageHeader
-        title="Supply & analytics"
-        description="What your orders used up."
+        title="Supply"
+        description="Add an invoice, then see what you had and what is left."
       />
-      <UsageView periods={periods} />
+      <ReceiptForm />
+      <div className="mt-12">
+        <UsageView periods={periods} />
+      </div>
     </Screen>
   );
 }

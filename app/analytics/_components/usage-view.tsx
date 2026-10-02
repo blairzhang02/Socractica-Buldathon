@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { formatAmount, type IngredientUsage, type UsageGroup } from "@/lib/usage";
+import { formatAmount, type StockRow, type UsageGroup } from "@/lib/usage";
+import type { Unit } from "@/lib/types";
 
 export type UsagePeriod = {
   id: "today" | "week";
@@ -9,8 +10,43 @@ export type UsagePeriod = {
   label: string;
   /** Sentence under the buttons, e.g. "13 orders in the last 7 days". */
   summary: string;
-  usage: IngredientUsage[];
+  stock: StockRow[];
 };
+
+/** Before and after share one unit, so 3.0 kg stays 2.6 kg rather than jumping to grams. */
+function pairedAmounts(had: number, left: number, unit: Unit) {
+  const before = formatWith(had, unit, had, left);
+  const afterAmount = formatWith(Math.abs(left), unit, had, left);
+  return {
+    before,
+    after: left < 0 ? `short ${afterAmount}` : afterAmount,
+  };
+}
+
+function formatWith(amount: number, unit: Unit, had: number, left: number) {
+  if (unit === "g" || unit === "kg") {
+    const grams = unit === "kg" ? amount * 1000 : amount;
+    const hadGrams = unit === "kg" ? had * 1000 : had;
+    const leftGrams = unit === "kg" ? left * 1000 : left;
+    if (hadGrams >= 1000 || Math.abs(leftGrams) >= 1000) {
+      const digits =
+        (hadGrams / 1000).toFixed(1) === (leftGrams / 1000).toFixed(1) ? 2 : 1;
+      return `${(grams / 1000).toFixed(digits)} kg`;
+    }
+    return formatAmount(amount, unit);
+  }
+  if (unit === "ml" || unit === "l") {
+    const ml = unit === "l" ? amount * 1000 : amount;
+    const hadMl = unit === "l" ? had * 1000 : had;
+    const leftMl = unit === "l" ? left * 1000 : left;
+    if (hadMl >= 1000 || Math.abs(leftMl) >= 1000) {
+      const digits = (hadMl / 1000).toFixed(1) === (leftMl / 1000).toFixed(1) ? 2 : 1;
+      return `${(ml / 1000).toFixed(digits)} L`;
+    }
+    return formatAmount(amount, unit);
+  }
+  return formatAmount(amount, unit);
+}
 
 const groups: { id: UsageGroup; label: string; icon: string }[] = [
   { id: "weighed", label: "Weighed", icon: "⚖️" },
@@ -51,14 +87,14 @@ export function UsageView({ periods }: { periods: UsagePeriod[] }) {
 
       <p className="mt-5 text-xl text-chocolate-600">{period.summary}</p>
 
-      {period.usage.length === 0 ? (
+      {period.stock.length === 0 ? (
         <p className="mt-10 rounded-3xl border-2 border-chocolate-700 bg-cream-100 px-6 py-8 text-center text-2xl text-chocolate-800">
-          No orders yet, so nothing has been used.
+          Add an invoice above. Then each ingredient shows what you had, and what is left.
         </p>
       ) : (
         <div className="mt-10 space-y-10">
           {groups.map((group) => {
-            const rows = period.usage.filter((u) => u.group === group.id);
+            const rows = period.stock.filter((row) => row.group === group.id);
             if (rows.length === 0) return null;
 
             return (
@@ -71,22 +107,28 @@ export function UsageView({ periods }: { periods: UsagePeriod[] }) {
                 </h2>
 
                 <ul className="rounded-3xl border-2 border-chocolate-700 bg-cream-100 px-6 py-2">
-                  {rows.map((row) => (
+                  {rows.map((row) => {
+                    const amounts = pairedAmounts(row.had, row.left, row.unit);
+                    return (
                     <li
-                      key={row.ingredientId}
-                      className="flex items-center gap-5 border-t-2 border-cream-300 py-4 first:border-t-0"
+                      key={`${row.name}-${row.unit}`}
+                      className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t-2 border-cream-300 py-4 first:border-t-0"
                     >
                       <span aria-hidden="true" className="text-5xl leading-none">
                         {row.icon}
                       </span>
-                      <span className="flex-1 text-2xl text-chocolate-900">
+                      <span className="min-w-40 flex-1 text-2xl text-chocolate-900">
                         {row.name}
                       </span>
-                      <span className="text-2xl font-semibold text-chocolate-800">
-                        {formatAmount(row.amount, row.unit)}
+                      <span className="text-2xl text-chocolate-800">
+                        Before {amounts.before}
+                      </span>
+                      <span className="text-2xl font-semibold text-chocolate-900">
+                        After {amounts.after}
                       </span>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               </section>
             );

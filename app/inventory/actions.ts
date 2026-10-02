@@ -29,7 +29,7 @@ export async function saveReceipt(input: { label: string; lines: ReceiptLine[] }
     label,
     lines,
   });
-  revalidatePath("/inventory");
+  revalidatePath("/analytics");
   return { ok: true as const, label };
 }
 

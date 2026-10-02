@@ -107,7 +107,7 @@ export function ReceiptForm() {
         setMessage({ ok: false, text: result.error });
         return;
       }
-      setMessage({ ok: true, text: `Saved ${result.label}. Inventory is updated below.` });
+      setMessage({ ok: true, text: `Saved ${result.label}. What's left is updated below.` });
       setLabel("");
       setLines([]);
       replacePreview(null);
