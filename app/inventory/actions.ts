@@ -9,8 +9,15 @@ export async function saveReceipt(input: { label: string; lines: ReceiptLine[] }
 
   const lines = input.lines.flatMap((line) => {
     const name = line.name.trim();
-    if (!name || !(line.quantity > 0)) return [];
-    return [{ name, quantity: line.quantity, unit: line.unit }];
+    if (!name || !(line.quantity > 0) || !(line.price >= 0)) return [];
+    return [
+      {
+        name,
+        quantity: line.quantity,
+        unit: line.unit,
+        price: Math.round(line.price * 100) / 100,
+      },
+    ];
   });
 
   if (lines.length === 0) {

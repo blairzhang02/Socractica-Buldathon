@@ -4,6 +4,8 @@ export type InvoiceLine = {
   name: string;
   quantity: number;
   unit: Unit;
+  /** What she paid for this line, in dollars. */
+  price: number;
 };
 
 const units = new Set<Unit>(["g", "kg", "ml", "l", "each"]);
@@ -26,11 +28,17 @@ export function parseInvoiceText(text: string): { label: string; lines: InvoiceL
   const lines: InvoiceLine[] = [];
   for (const line of data.lines) {
     if (!line || typeof line !== "object") continue;
-    const row = line as { name?: unknown; quantity?: unknown; unit?: unknown };
+    const row = line as { name?: unknown; quantity?: unknown; unit?: unknown; price?: unknown };
     if (typeof row.name !== "string" || typeof row.quantity !== "number") continue;
     if (typeof row.unit !== "string" || !units.has(row.unit as Unit)) continue;
+    if (typeof row.price !== "number" || row.price < 0) continue;
     if (!row.name.trim() || !(row.quantity > 0)) continue;
-    lines.push({ name: row.name.trim(), quantity: row.quantity, unit: row.unit as Unit });
+    lines.push({
+      name: row.name.trim(),
+      quantity: row.quantity,
+      unit: row.unit as Unit,
+      price: row.price,
+    });
   }
 
   if (!data.label.trim() || lines.length === 0) return null;

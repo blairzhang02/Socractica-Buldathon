@@ -5,7 +5,7 @@ import { saveReceipt } from "@/app/inventory/actions";
 import { parseInvoiceText } from "@/lib/invoice-file";
 import type { Unit } from "@/lib/types";
 
-type Line = { key: number; name: string; quantity: string; unit: Unit };
+type Line = { key: number; name: string; quantity: string; unit: Unit; price: string };
 
 const units: Unit[] = ["g", "ml", "each"];
 
@@ -21,6 +21,7 @@ export function ReceiptForm() {
   const [draftName, setDraftName] = useState("");
   const [draftQty, setDraftQty] = useState("");
   const [draftUnit, setDraftUnit] = useState<Unit>("g");
+  const [draftPrice, setDraftPrice] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
   const [pending, startTransition] = useTransition();
@@ -49,6 +50,7 @@ export function ReceiptForm() {
             name: line.name,
             quantity: String(line.quantity),
             unit: line.unit,
+            price: line.price.toFixed(2),
           })),
         );
         setMessage({ ok: true, text: "Read from the invoice. Change anything that looks wrong." });
@@ -74,16 +76,17 @@ export function ReceiptForm() {
 
   function addLine() {
     const name = draftName.trim();
-    if (!name || !(Number(draftQty) > 0)) {
-      setMessage({ ok: false, text: "Enter the ingredient and how much." });
+    if (!name || !(Number(draftQty) > 0) || draftPrice.trim() === "" || Number(draftPrice) < 0) {
+      setMessage({ ok: false, text: "Enter the ingredient, how much, and the price." });
       return;
     }
     setLines((prev) => [
       ...prev,
-      { key: nextKey++, name, quantity: draftQty, unit: draftUnit },
+      { key: nextKey++, name, quantity: draftQty, unit: draftUnit, price: draftPrice },
     ]);
     setDraftName("");
     setDraftQty("");
+    setDraftPrice("");
     setDraftUnit("g");
     setMessage(null);
   }
@@ -97,6 +100,7 @@ export function ReceiptForm() {
           name: line.name,
           quantity: Number(line.quantity),
           unit: line.unit,
+          price: Number(line.price),
         })),
       });
       if (!result.ok) {
@@ -239,6 +243,24 @@ export function ReceiptForm() {
         </div>
       </div>
 
+      <label className="mt-4 block text-sm font-semibold text-chocolate-700" htmlFor="price">
+        Price
+      </label>
+      <div className="mt-1 flex items-center gap-2">
+        <span className="text-lg font-semibold text-chocolate-700">$</span>
+        <input
+          id="price"
+          className={field}
+          type="number"
+          min="0"
+          step="0.01"
+          inputMode="decimal"
+          value={draftPrice}
+          onChange={(event) => setDraftPrice(event.target.value)}
+          placeholder="6.40"
+        />
+      </div>
+
       <button
         type="submit"
         className="mt-4 rounded-full border border-chocolate-500 px-4 py-2 text-sm font-semibold text-chocolate-700 hover:bg-cream-200"
@@ -252,7 +274,7 @@ export function ReceiptForm() {
             <li key={line.key} className="flex items-center justify-between gap-3 px-4 py-3">
               <span className="font-medium">{line.name}</span>
               <span className="text-sm text-chocolate-600">
-                {line.quantity} {line.unit}
+                {line.quantity} {line.unit} · ${Number(line.price).toFixed(2)}
                 <button
                   type="button"
                   onClick={() => setLines((prev) => prev.filter((item) => item.key !== line.key))}

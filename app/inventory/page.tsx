@@ -8,6 +8,10 @@ function formatQty(quantity: number) {
     : quantity.toLocaleString("en-US", { maximumFractionDigits: 2 });
 }
 
+function formatPrice(price: number) {
+  return `$${price.toFixed(2)}`;
+}
+
 export default async function Page() {
   const receipts = await readReceipts();
   const inventory = inventoryFromReceipts(receipts);
@@ -36,7 +40,7 @@ export default async function Page() {
               >
                 <span className="font-medium">{item.name}</span>
                 <span className="text-sm text-chocolate-600">
-                  {formatQty(item.quantity)} {item.unit}
+                  {formatQty(item.quantity)} {item.unit} · {formatPrice(item.price)}
                 </span>
               </li>
             ))}

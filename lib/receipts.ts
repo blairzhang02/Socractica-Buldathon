@@ -8,6 +8,8 @@ export type ReceiptLine = {
   name: string;
   quantity: number;
   unit: Unit;
+  /** What she paid for this line, in dollars. */
+  price: number;
 };
 
 export type Receipt = {
@@ -20,6 +22,8 @@ export type InventoryItem = {
   name: string;
   quantity: number;
   unit: Unit;
+  /** Total paid for this ingredient across invoices. */
+  price: number;
 };
 
 export async function readReceipts(): Promise<Receipt[]> {
@@ -43,8 +47,14 @@ export function inventoryFromReceipts(receipts: Receipt[]): InventoryItem[] {
       const existing = totals.get(key);
       if (existing) {
         existing.quantity += line.quantity;
+        existing.price += line.price ?? 0;
       } else {
-        totals.set(key, { name, quantity: line.quantity, unit: line.unit });
+        totals.set(key, {
+          name,
+          quantity: line.quantity,
+          unit: line.unit,
+          price: line.price ?? 0,
+        });
       }
     }
   }
