@@ -1,4 +1,5 @@
 import { PageHeader } from "@/app/_components/page-header";
+import { Screen } from "@/app/_components/screen";
 import {
   UsageView,
   type UsagePeriod,
@@ -35,12 +36,12 @@ export default async function Page() {
   ];
 
   return (
-    <>
+    <Screen>
       <PageHeader
         title="Supply & analytics"
         description="What your orders used up."
       />
       <UsageView periods={periods} />
-    </>
+    </Screen>
   );
 }

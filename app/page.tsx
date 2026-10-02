@@ -1,106 +1,77 @@
-import { PageHeader } from "@/app/_components/page-header";
-import { pastOrders, type PastOrder } from "@/lib/data/past-orders";
-import { CAFE_TIME_ZONE, dayKey } from "@/lib/usage";
+import Link from "next/link";
 
-// Owner: TBD
-// Mockup: past orders showing items, quantity and timestamp only. Reads from
-// lib/data/past-orders.ts until orders are stored for real.
+// The menu. Four big targets, nothing else on screen — no nav bar, no scroll.
+// Every other screen gets a "Back to menu" button from app/_components/home-bar.
 
-const dayLabel = new Intl.DateTimeFormat("en-US", {
-  weekday: "long",
-  month: "long",
-  day: "numeric",
-  timeZone: CAFE_TIME_ZONE,
-});
+type Destination = {
+  href: "/orders" | "/analytics" | "/restock" | "/recipe-builder";
+  icon: string;
+  label: string;
+  blurb: string;
+  tile: string;
+};
 
-const timeLabel = new Intl.DateTimeFormat("en-US", {
-  hour: "numeric",
-  minute: "2-digit",
-  timeZone: CAFE_TIME_ZONE,
-});
-
-function groupByDay(orders: PastOrder[]) {
-  const today = dayKey(new Date());
-  const yesterday = dayKey(new Date(Date.now() - 86_400_000));
-  const groups: { key: string; label: string; orders: PastOrder[] }[] = [];
-
-  for (const order of orders) {
-    const date = new Date(order.placedAt);
-    const key = dayKey(date);
-    let group = groups.find((g) => g.key === key);
-    if (!group) {
-      const label =
-        key === today
-          ? "Today"
-          : key === yesterday
-            ? "Yesterday"
-            : dayLabel.format(date);
-      group = { key, label, orders: [] };
-      groups.push(group);
-    }
-    group.orders.push(order);
-  }
-
-  return groups;
-}
+const destinations: Destination[] = [
+  {
+    href: "/orders",
+    icon: "🧾",
+    label: "Order history",
+    blurb: "See what has been ordered",
+    tile: "bg-custard hover:bg-honey",
+  },
+  {
+    href: "/analytics",
+    icon: "🥣",
+    label: "Supply",
+    blurb: "See what has been used up",
+    tile: "bg-matcha hover:bg-lime",
+  },
+  {
+    href: "/restock",
+    icon: "🛒",
+    label: "Restock",
+    blurb: "See what to buy next",
+    tile: "bg-tan hover:bg-tangerine",
+  },
+  {
+    href: "/recipe-builder",
+    icon: "📖",
+    label: "Recipes",
+    blurb: "Add and edit recipes",
+    tile: "bg-periwinkle hover:bg-blueberry",
+  },
+];
 
 export default function Page() {
-  const groups = groupByDay(pastOrders);
-
   return (
-    <>
-      <PageHeader
-        title="Order history"
-        description="Every order placed so far, newest first."
-      />
+    <div className="flex flex-1 flex-col px-5 py-6 sm:px-8 sm:py-8">
+      <header className="mb-6 text-center sm:mb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-chocolate-900 sm:text-5xl">
+          Making Dough
+        </h1>
+        <p className="mt-2 text-xl text-chocolate-600 sm:text-2xl">
+          Tap a button to begin.
+        </p>
+      </header>
 
-      <div className="space-y-10">
-        {groups.map((group) => (
-          <section key={group.key}>
-            <h2 className="mb-4 text-2xl font-semibold text-chocolate-900">
-              {group.label}
-            </h2>
-
-            <ul className="space-y-6">
-              {group.orders.map((order) => (
-                <li
-                  key={order.id}
-                  className="rounded-3xl border-2 border-chocolate-700 bg-cream-100 px-6 py-5"
-                >
-                  <p className="flex items-center gap-3 text-2xl font-semibold text-chocolate-800">
-                    <span aria-hidden="true" className="text-3xl">
-                      🕐
-                    </span>
-                    {timeLabel.format(new Date(order.placedAt))}
-                  </p>
-
-                  <ul className="mt-2">
-                    {order.items.map((item) => (
-                      <li
-                        key={item.name}
-                        className="flex items-center gap-5 border-t-2 border-cream-300 py-4"
-                      >
-                        <span aria-hidden="true" className="text-5xl leading-none">
-                          {item.icon}
-                        </span>
-                        <span className="flex-1 text-2xl text-chocolate-900">
-                          {item.name}
-                        </span>
-                        <span className="rounded-full bg-chocolate-700 px-5 py-2 text-2xl font-semibold text-cream-50">
-                          <span aria-hidden="true">×&nbsp;{item.quantity}</span>
-                          <span className="sr-only">
-                            {item.quantity} ordered
-                          </span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-      </div>
-    </>
+      <nav aria-label="Main menu" className="flex flex-1">
+        <ul className="grid w-full flex-1 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+          {destinations.map(({ href, icon, label, blurb, tile }) => (
+            <li key={href} className="flex min-h-44">
+              <Link
+                href={href}
+                className={`flex w-full flex-col items-center justify-center gap-3 rounded-[2rem] border-4 border-chocolate-700 p-6 text-center text-chocolate-900 shadow-[0_6px_0_var(--color-chocolate-700)] transition-transform hover:-translate-y-1 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900 active:translate-y-1 active:shadow-none ${tile}`}
+              >
+                <span aria-hidden="true" className="text-7xl leading-none sm:text-8xl">
+                  {icon}
+                </span>
+                <span className="text-3xl font-bold sm:text-4xl">{label}</span>
+                <span className="text-lg sm:text-xl">{blurb}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
