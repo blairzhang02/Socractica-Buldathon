@@ -13,9 +13,10 @@ const field =
 
 let nextKey = 1;
 
-export function RecipeForm() {
-  const [step, setStep] = useState<"name" | "ingredients">("name");
+export function RecipeForm({ currency }: { currency: string }) {
+  const [step, setStep] = useState<"name" | "price" | "ingredients">("name");
   const [name, setName] = useState("");
+  const [sellPrice, setSellPrice] = useState("");
   const [lines, setLines] = useState<Line[]>([]);
   const [draftName, setDraftName] = useState("");
   const [draftQty, setDraftQty] = useState("");
@@ -44,6 +45,7 @@ export function RecipeForm() {
     startTransition(async () => {
       const result = await createMenuItem({
         name,
+        sellPrice: Number(sellPrice),
         lines: lines.map((line) => ({
           name: line.name,
           quantity: Number(line.quantity),
@@ -56,6 +58,7 @@ export function RecipeForm() {
       }
       setMessage({ ok: true, text: `Saved ${result.name}.` });
       setName("");
+      setSellPrice("");
       setLines([]);
       setStep("name");
     });
@@ -66,7 +69,7 @@ export function RecipeForm() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          if (name.trim()) setStep("ingredients");
+          if (name.trim()) setStep("price");
         }}
         className="mx-auto max-w-xl rounded-2xl border border-cream-300 bg-cream-100 p-6"
       >
@@ -91,6 +94,56 @@ export function RecipeForm() {
     );
   }
 
+  if (step === "price") {
+    const symbol = currency === "USD" ? "$" : currency;
+    return (
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (sellPrice.trim() !== "" && Number(sellPrice) >= 0) setStep("ingredients");
+        }}
+        className="mx-auto max-w-xl rounded-2xl border border-cream-300 bg-cream-100 p-6"
+      >
+        <p className="text-sm font-semibold text-taupe">{name.trim()}</p>
+        <h2 className="mt-1 text-2xl font-semibold tracking-tight text-chocolate-900">
+          What do you charge?
+        </h2>
+        <div className="mt-5 flex items-center gap-2">
+          <span className="text-lg font-semibold text-chocolate-700">{symbol}</span>
+          <input
+            className={field}
+            type="number"
+            min="0"
+            step="0.01"
+            inputMode="decimal"
+            value={sellPrice}
+            onChange={(event) => setSellPrice(event.target.value)}
+            placeholder="8.50"
+            autoFocus
+          />
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setStep("name")}
+            className="rounded-full px-4 py-2.5 text-sm font-semibold text-chocolate-700 hover:bg-cream-200"
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            disabled={sellPrice.trim() === "" || Number(sellPrice) < 0}
+            className="rounded-full bg-chocolate-700 px-5 py-2.5 text-sm font-bold text-cream-100 disabled:opacity-40"
+          >
+            Next
+          </button>
+        </div>
+      </form>
+    );
+  }
+
+  const symbol = currency === "USD" ? "$" : currency;
+
   return (
     <form
       onSubmit={(event) => {
@@ -99,7 +152,9 @@ export function RecipeForm() {
       }}
       className="mx-auto max-w-xl rounded-2xl border border-cream-300 bg-cream-100 p-6"
     >
-      <p className="text-sm font-semibold text-taupe">{name.trim()}</p>
+      <p className="text-sm font-semibold text-taupe">
+        {name.trim()} · {symbol}{Number(sellPrice).toFixed(2)}
+      </p>
       <h2 className="mt-1 text-2xl font-semibold tracking-tight text-chocolate-900">
         What goes in it?
       </h2>
@@ -190,7 +245,7 @@ export function RecipeForm() {
           type="button"
           onClick={() => {
             setMessage(null);
-            setStep("name");
+            setStep("price");
           }}
           className="rounded-full px-4 py-2.5 text-sm font-semibold text-chocolate-700 hover:bg-cream-200"
         >

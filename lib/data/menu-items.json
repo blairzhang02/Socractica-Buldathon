@@ -118,6 +118,18 @@
       "name": "r",
       "unit": "g",
       "unitPrice": 0
+    },
+    {
+      "id": "cream-0-murl2ky0",
+      "name": "Cream",
+      "unit": "g",
+      "unitPrice": 0
+    },
+    {
+      "id": "flour-1-murl2ky0",
+      "name": "Flour",
+      "unit": "g",
+      "unitPrice": 0
     }
   ],
   "menuItems": [
@@ -391,6 +403,33 @@
         {
           "ingredientId": "r-0-murkwlg8",
           "quantity": 45,
+          "unit": "g",
+          "unitPrice": 0,
+          "lineCost": 0
+        }
+      ],
+      "totalCost": 0
+    },
+    {
+      "id": "croissant-murl2ky0",
+      "name": "Croissant",
+      "category": "pastry",
+      "yield": {
+        "quantity": 1,
+        "unit": "each"
+      },
+      "sellPrice": 3,
+      "ingredients": [
+        {
+          "ingredientId": "cream-0-murl2ky0",
+          "quantity": 30,
+          "unit": "g",
+          "unitPrice": 0,
+          "lineCost": 0
+        },
+        {
+          "ingredientId": "flour-1-murl2ky0",
+          "quantity": 3,
           "unit": "g",
           "unitPrice": 0,
           "lineCost": 0

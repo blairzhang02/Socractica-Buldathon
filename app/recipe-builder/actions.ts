@@ -10,9 +10,16 @@ export type NewRecipeLine = {
   unit: Unit;
 };
 
-export async function createMenuItem(input: { name: string; lines: NewRecipeLine[] }) {
+export async function createMenuItem(input: {
+  name: string;
+  sellPrice: number;
+  lines: NewRecipeLine[];
+}) {
   const name = input.name.trim();
   if (!name) return { ok: false as const, error: "Give the recipe a name." };
+  if (!(input.sellPrice >= 0)) {
+    return { ok: false as const, error: "Enter what you charge." };
+  }
 
   const catalog = await readCatalog();
   const known = [...catalog.ingredients];
@@ -56,7 +63,7 @@ export async function createMenuItem(input: { name: string; lines: NewRecipeLine
     name,
     category: "pastry",
     yield: { quantity: 1, unit: "each" },
-    sellPrice: 0,
+    sellPrice: round2(input.sellPrice),
     ingredients,
     totalCost,
   };
