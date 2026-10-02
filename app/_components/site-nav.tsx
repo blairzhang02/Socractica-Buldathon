@@ -8,15 +8,18 @@ const links = [
   { href: "/new-order", label: "New order" },
   { href: "/analytics", label: "Supply & analytics" },
   { href: "/restock", label: "Restock" },
+  { href: "/recipe-builder", label: "Recipe builder" },
 ] as const;
 
 export function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-black/10 dark:border-white/15">
+    <header className="border-b-2 border-chocolate-700 bg-cream-100">
       <nav className="mx-auto flex max-w-5xl flex-wrap items-center gap-1 px-6 py-3">
-        <span className="mr-4 font-semibold tracking-tight">LeftNoCrumbs</span>
+        <span className="mr-4 font-semibold tracking-tight text-chocolate-900">
+          LeftNoCrumbs
+        </span>
         {links.map(({ href, label }) => {
           const active = pathname === href;
           return (
@@ -24,10 +27,10 @@ export function SiteNav() {
               key={href}
               href={href}
               aria-current={active ? "page" : undefined}
-              className={`rounded-md px-3 py-1.5 text-sm transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
                 active
-                  ? "bg-foreground text-background"
-                  : "hover:bg-black/5 dark:hover:bg-white/10"
+                  ? "bg-chocolate-700 text-cream-100"
+                  : "text-chocolate-700 hover:bg-cream-200"
               }`}
             >
               {label}

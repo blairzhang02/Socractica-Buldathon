@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
+/* Making Dough palette — sampled from the buildathon artwork. See brand/palette.html. */
+@theme {
+  --color-chocolate-900: #4A1B16;
+  --color-chocolate-800: #63231D;
+  --color-chocolate-700: #6D2723;
+  --color-chocolate-600: #802824;
+  --color-chocolate-500: #AD634E;
+  --color-taupe: #987A64;
+  --color-cream-50: #FCF5EB;
+  --color-cream-100: #F9EDDE;
+  --color-cream-200: #F7E3CE;
+  --color-cream-300: #EEDCC4;
+  --color-tan: #EBB084;
+  --color-tangerine: #F9922D;
+  --color-honey: #F9BD45;
+  --color-custard: #FCD058;
+  --color-berry: #EF4F3F;
+  --color-rose: #E37C81;
+  --color-lime: #B8BC1F;
+  --color-matcha: #D8D593;
+  --color-blueberry: #618EC2;
+  --color-periwinkle: #B1BED8;
+  --color-ink-berry: #D02311;
+  --color-ink-rose: #CD2C34;
+  --color-ink-tangerine: #A75505;
+  --color-ink-honey: #916205;
+  --color-ink-custard: #8B6602;
+  --color-ink-lime: #6B6D12;
+  --color-ink-blueberry: #406FA6;
+  --color-ink-tan: #A7571B;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FCF5EB;
+  --foreground: #4A1B16;
 }
 
 @theme inline {
@@ -12,15 +44,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }

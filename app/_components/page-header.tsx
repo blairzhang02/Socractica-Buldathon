@@ -6,9 +6,11 @@ export function PageHeader({
   description: string;
 }) {
   return (
-    <div className="mb-8 border-b border-black/10 pb-5 dark:border-white/15">
-      <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
-      <p className="mt-1.5 text-sm opacity-70">{description}</p>
+    <div className="mb-8 border-b-2 border-chocolate-700 pb-5">
+      <h1 className="text-3xl font-semibold tracking-tight text-chocolate-900">
+        {title}
+      </h1>
+      <p className="mt-2 text-lg text-chocolate-600">{description}</p>
     </div>
   );
 }
