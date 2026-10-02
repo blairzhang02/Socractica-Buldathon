@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="820" viewBox="0 0 640 820">
+  <!-- invoice {"label":"Valley Dairy, Oct 1","lines":[{"name":"Heavy cream","quantity":800,"unit":"ml"},{"name":"Unsalted butter","quantity":900,"unit":"g"},{"name":"Honey","quantity":500,"unit":"g"}]} -->
+  <rect width="640" height="820" fill="#FCF5EB"/>
+  <rect x="48" y="40" width="544" height="740" fill="#F9EDDE" stroke="#6D2723" stroke-width="3"/>
+  <text x="80" y="100" fill="#4A1B16" font-family="Georgia, serif" font-size="36">Valley Dairy</text>
+  <text x="80" y="132" fill="#802824" font-family="Georgia, serif" font-size="16">Invoice 1042 - October 1, 2026</text>
+  <text x="80" y="176" fill="#4A1B16" font-family="Georgia, serif" font-size="16">Bill to: Grandma's Bakeria</text>
+  <line x1="80" y1="200" x2="560" y2="200" stroke="#EEDCC4" stroke-width="2"/>
+  <text x="80" y="236" fill="#987A64" font-family="Georgia, serif" font-size="13">ITEM</text>
+  <text x="430" y="236" fill="#987A64" font-family="Georgia, serif" font-size="13">AMOUNT</text>
+  <text x="80" y="280" fill="#4A1B16" font-family="Georgia, serif" font-size="22">Heavy cream</text>
+  <text x="430" y="280" fill="#4A1B16" font-family="Georgia, serif" font-size="22">800 ml</text>
+  <text x="80" y="328" fill="#4A1B16" font-family="Georgia, serif" font-size="22">Unsalted butter</text>
+  <text x="430" y="328" fill="#4A1B16" font-family="Georgia, serif" font-size="22">900 g</text>
+  <text x="80" y="376" fill="#4A1B16" font-family="Georgia, serif" font-size="22">Honey</text>
+  <text x="430" y="376" fill="#4A1B16" font-family="Georgia, serif" font-size="22">500 g</text>
+  <line x1="80" y1="410" x2="560" y2="410" stroke="#EEDCC4" stroke-width="2"/>
+  <text x="80" y="460" fill="#63231D" font-family="Georgia, serif" font-size="16">Paid in full. Deliver to the bake shop.</text>
+</svg>

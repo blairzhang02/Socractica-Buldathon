@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-// The menu. Four big targets, nothing else on screen — no nav bar, no scroll.
+// The menu. Big targets, nothing else on screen — no nav bar, no scroll.
 // Every other screen gets a "Back to menu" button from app/_components/home-bar.
 
 type Destination = {
-  href: "/orders" | "/analytics" | "/restock" | "/recipe-builder";
+  href: "/orders" | "/analytics" | "/restock" | "/recipe-builder" | "/inventory";
   icon: string;
   label: string;
   blurb: string;
@@ -39,6 +39,13 @@ const destinations: Destination[] = [
     label: "Recipes",
     blurb: "Add and edit recipes",
     tile: "bg-periwinkle hover:bg-blueberry",
+  },
+  {
+    href: "/inventory",
+    icon: "📦",
+    label: "Inventory",
+    blurb: "Add invoices and see what's on hand",
+    tile: "bg-rose hover:bg-berry",
   },
 ];
 
