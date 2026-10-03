@@ -4,11 +4,13 @@ import {
   RestockPlanner,
   type TimeframeOption,
 } from "@/app/restock/_components/restock-planner";
+import { SupplierBoard } from "@/app/restock/_components/supplier-board";
 import { readCatalog } from "@/lib/catalog";
 import { pastOrders } from "@/lib/data/past-orders";
 import { inventoryFromReceipts, readReceipts } from "@/lib/receipts";
 import { buildRestockPlan, type RestockPlan } from "@/lib/restock";
-import { ordersInLastDays } from "@/lib/usage";
+import type { DailyUsage } from "@/lib/supplier-plan";
+import { ingredientUsage, ordersInLastDays } from "@/lib/usage";
 
 // Owner: TBD
 // The plan is real arithmetic over lib/data/past-orders.ts and the saved
@@ -41,6 +43,13 @@ export default async function Page() {
     });
   }
 
+  // What a single day gets through, averaged over the sample window. The
+  // supplier advice is this against what each supplier delivers daily.
+  const usedPerDay: DailyUsage = {};
+  for (const row of ingredientUsage(orders, catalog)) {
+    usedPerDay[row.ingredientId] = row.amount / SAMPLE_DAYS;
+  }
+
   return (
     <Screen>
       <PageHeader
@@ -54,13 +63,7 @@ export default async function Page() {
         currencySymbol={catalog.currency === "USD" ? "$" : `${catalog.currency} `}
       />
 
-      <p className="mt-10 rounded-2xl bg-cream-200 px-5 py-4 text-base text-chocolate-700">
-        <span aria-hidden="true" className="mr-2">
-          ℹ️
-        </span>
-        Demo: the shopping list is worked out from your own orders and invoices.
-        No AI model is involved — the pause is just for show.
-      </p>
+      <SupplierBoard usedPerDay={usedPerDay} />
     </Screen>
   );
 }
