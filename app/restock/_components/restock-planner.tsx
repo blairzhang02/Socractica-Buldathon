@@ -126,10 +126,10 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
                 type="button"
                 onClick={() => choose(o.weeks)}
                 aria-pressed={active}
-                className={`rounded-2xl border-4 border-chocolate-700 px-7 py-5 text-2xl font-bold transition-colors focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900 ${
+                className={`rounded-2xl border-4 border-chocolate-700 px-7 py-5 font-display text-2xl font-bold transition-colors focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900 ${
                   active
-                    ? "bg-chocolate-700 text-cream-50"
-                    : "bg-cream-100 text-chocolate-900 hover:bg-custard"
+                    ? "bg-linear-to-br from-chocolate-600 to-chocolate-900 text-cream-50"
+                    : "bg-linear-to-b from-cream-50 to-cream-200 text-chocolate-900 hover:from-custard hover:to-honey"
                 }`}
               >
                 {o.label}
@@ -150,7 +150,7 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
           type="button"
           onClick={generate}
           disabled={stage === "working"}
-          className="w-full rounded-3xl border-4 border-chocolate-700 bg-custard px-8 py-7 text-3xl font-bold text-chocolate-900 shadow-[0_6px_0_var(--color-chocolate-700)] transition-transform hover:-translate-y-1 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900 active:translate-y-1 active:shadow-none disabled:cursor-wait disabled:opacity-80 disabled:hover:translate-y-0 sm:w-auto"
+          className="w-full rounded-3xl border-4 border-chocolate-700 bg-linear-to-br from-custard to-honey px-8 py-7 font-display text-3xl font-bold text-chocolate-900 shadow-[0_6px_0_var(--color-chocolate-700)] transition-transform hover:-translate-y-1 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900 active:translate-y-1 active:shadow-none disabled:cursor-wait disabled:opacity-80 disabled:hover:translate-y-0 sm:w-auto"
         >
           <span aria-hidden="true" className="mr-3">
             ✨
@@ -161,7 +161,7 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
 
       <div aria-live="polite" aria-atomic="false">
         {stage !== "idle" && (
-          <section className="rounded-3xl border-4 border-chocolate-700 bg-cream-100 p-6 sm:p-8">
+          <section className="rounded-3xl border-4 border-chocolate-700 bg-linear-to-b from-cream-50 to-cream-200 p-6 sm:p-8">
             <ol className="space-y-3">
               {steps.slice(0, stepsShown).map((step) => (
                 <li
@@ -210,7 +210,7 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
                           <span className="flex-1 text-2xl text-chocolate-900">
                             {line.name}
                           </span>
-                          <span className="rounded-full bg-chocolate-700 px-5 py-2 text-xl font-bold text-cream-50">
+                          <span className="rounded-full bg-linear-to-br from-chocolate-600 to-chocolate-800 px-5 py-2 text-xl font-bold text-cream-50">
                             {formatAmount(line.toBuy, line.unit)}
                           </span>
                           <span className="w-24 text-right text-xl text-chocolate-600">
@@ -236,7 +236,7 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
                       {plan.covered.map((line) => (
                         <li
                           key={line.ingredientId}
-                          className="rounded-full bg-matcha px-4 py-2 text-lg text-chocolate-900"
+                          className="rounded-full bg-linear-to-br from-matcha to-lime px-4 py-2 text-lg text-chocolate-900"
                         >
                           <span aria-hidden="true" className="mr-1.5">
                             {line.icon}

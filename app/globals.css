@@ -30,6 +30,13 @@
   --color-ink-lime: #6B6D12;
   --color-ink-blueberry: #406FA6;
   --color-ink-tan: #A7571B;
+
+  /* Lighter stops for gradients. Each stays at or above 7:1 with
+     chocolate-900, so text keeps AAA contrast anywhere on the ramp. */
+  --color-tangerine-soft: #FAA14B;
+  --color-blueberry-soft: #9CB8D9;
+  --color-rose-soft: #EBA2A5;
+  --color-berry-soft: #F6A198;
 }
 
 :root {
@@ -40,12 +47,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-baloo);
 }
 
 body {
-  background: var(--background);
+  /* Fixed so the wash stays put instead of repeating down a long order list. */
+  background: linear-gradient(168deg, #FCF5EB 0%, #FAEEDF 45%, #F7E3CE 100%)
+    fixed;
   color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans), ui-rounded, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-sans), ui-rounded, system-ui,
+    sans-serif;
 }

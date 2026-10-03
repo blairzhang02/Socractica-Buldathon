@@ -66,7 +66,7 @@ export default function Page() {
               {group.orders.map((order) => (
                 <li
                   key={order.id}
-                  className="rounded-3xl border-2 border-chocolate-700 bg-cream-100 px-6 py-5"
+                  className="rounded-3xl border-2 border-chocolate-700 bg-linear-to-b from-cream-50 to-cream-200 px-6 py-5"
                 >
                   <p className="flex items-center gap-3 text-2xl font-semibold text-chocolate-800">
                     <span aria-hidden="true" className="text-3xl">
@@ -87,7 +87,7 @@ export default function Page() {
                         <span className="flex-1 text-2xl text-chocolate-900">
                           {item.name}
                         </span>
-                        <span className="rounded-full bg-chocolate-700 px-5 py-2 text-2xl font-semibold text-cream-50">
+                        <span className="rounded-full bg-linear-to-br from-chocolate-600 to-chocolate-800 px-5 py-2 text-2xl font-semibold text-cream-50">
                           <span aria-hidden="true">×&nbsp;{item.quantity}</span>
                           <span className="sr-only">
                             {item.quantity} ordered

@@ -13,11 +13,11 @@ export function HomeBar() {
   if (pathname === "/") return null;
 
   return (
-    <div className="sticky top-0 z-20 border-b-4 border-chocolate-700 bg-cream-100">
+    <div className="sticky top-0 z-20 border-b-4 border-chocolate-700 bg-linear-to-b from-cream-50 to-cream-200">
       <div className="mx-auto w-full max-w-5xl px-6 py-4">
         <Link
           href="/"
-          className="inline-flex items-center gap-3 rounded-full bg-chocolate-700 px-8 py-4 text-2xl font-bold text-cream-50 transition-colors hover:bg-chocolate-900 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900"
+          className="inline-flex items-center gap-3 rounded-full bg-linear-to-br from-chocolate-600 to-chocolate-900 px-8 py-4 font-display text-2xl font-bold text-cream-50 transition-all hover:from-chocolate-700 hover:to-chocolate-900 focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-chocolate-900"
         >
           <span aria-hidden="true" className="text-3xl leading-none">
             🏠
