@@ -246,7 +246,7 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
                 {change ? (
                   <p
                     className={`flex-1 rounded-2xl px-5 py-3 text-xl font-semibold text-chocolate-900 ${
-                      a.kind === "up" ? "bg-honey" : "bg-matcha"
+                      a.kind === "up" ? "bg-lime" : "bg-berry"
                     }`}
                   >
                     <span aria-hidden="true" className="mr-2">
