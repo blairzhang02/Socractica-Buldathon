@@ -1,10 +1,10 @@
 import { PageHeader } from "@/app/_components/page-header";
 import { Screen } from "@/app/_components/screen";
-import {
-  RestockPlanner,
-  type TimeframeOption,
-} from "@/app/restock/_components/restock-planner";
+import { BudgetedRestock } from "@/app/restock/_components/budgeted-restock";
+import type { TimeframeOption } from "@/app/restock/_components/restock-planner";
 import { SupplierBoard } from "@/app/restock/_components/supplier-board";
+import { readBudget } from "@/lib/budget";
+import { spentFromReceipts } from "@/lib/budget-math";
 import { readCatalog } from "@/lib/catalog";
 import { pastOrders } from "@/lib/data/past-orders";
 import { inventoryFromReceipts, readReceipts } from "@/lib/receipts";
@@ -28,7 +28,11 @@ const options: TimeframeOption[] = [
 ];
 
 export default async function Page() {
-  const [catalog, receipts] = await Promise.all([readCatalog(), readReceipts()]);
+  const [catalog, receipts, budget] = await Promise.all([
+    readCatalog(),
+    readReceipts(),
+    readBudget(),
+  ]);
   const inventory = inventoryFromReceipts(receipts);
   const orders = ordersInLastDays(pastOrders, SAMPLE_DAYS);
 
@@ -54,10 +58,12 @@ export default async function Page() {
     <Screen>
       <PageHeader
         title="Restock"
-        description="Pick how far ahead you are planning, and we will work out the shopping list."
+        description="Set your budget, pick how far ahead you are planning, and we will work out the shopping list."
       />
 
-      <RestockPlanner
+      <BudgetedRestock
+        budget={budget}
+        spent={spentFromReceipts(receipts)}
         options={options}
         plans={plans}
         currencySymbol={catalog.currency === "USD" ? "$" : `${catalog.currency} `}

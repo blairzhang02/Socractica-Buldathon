@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { budgetBreakdown, trimToBudget } from "@/lib/budget-math";
 import type { RestockPlan } from "@/lib/restock";
 import { formatAmount } from "@/lib/usage";
 
@@ -20,6 +21,10 @@ type Props = {
   /** One ready-made plan per option, keyed by week count. */
   plans: Record<number, RestockPlan>;
   currencySymbol: string;
+  /** Budget minus what the invoices already came to. */
+  budgetLeft: number;
+  /** Reports what the plan on screen costs, or 0 when there is none. */
+  onPlannedChange: (cost: number) => void;
 };
 
 type Stage = "idle" | "working" | "done";
@@ -30,7 +35,13 @@ const money = (value: number, symbol: string) =>
     maximumFractionDigits: 2,
   })}`;
 
-export function RestockPlanner({ options, plans, currencySymbol }: Props) {
+export function RestockPlanner({
+  options,
+  plans,
+  currencySymbol,
+  budgetLeft,
+  onPlannedChange,
+}: Props) {
   const [weeks, setWeeks] = useState(options[0]?.weeks ?? 4);
   const [stage, setStage] = useState<Stage>("idle");
   const [stepsShown, setStepsShown] = useState(0);
@@ -39,6 +50,9 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
 
   const plan = plans[weeks];
   const option = options.find((o) => o.weeks === weeks);
+  const money$ = (v: number) => money(v, currencySymbol);
+  const budget = budgetBreakdown(budgetLeft, 0, plan.totalCost);
+  const trimmed = budget.fits ? null : trimToBudget(plan, budgetLeft);
 
   const steps = [
     `Reading ${plan.sampleOrders} recent orders…`,
@@ -79,7 +93,10 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
     });
 
     timers.current.push(
-      setTimeout(() => setStage("done"), 450 + steps.length * 650),
+      setTimeout(() => {
+        setStage("done");
+        onPlannedChange(plan.totalCost);
+      }, 450 + steps.length * 650),
     );
   }
 
@@ -98,6 +115,7 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
 
   function choose(next: number) {
     reset();
+    onPlannedChange(0);
     setWeeks(next);
     setStage("idle");
     setTyped("");
@@ -192,6 +210,80 @@ export function RestockPlanner({ options, plans, currencySymbol }: Props) {
                     </span>
                   )}
                 </p>
+
+                <div
+                  className={`mt-6 rounded-2xl border-4 border-chocolate-700 p-5 ${
+                    budget.fits
+                      ? "bg-linear-to-br from-matcha to-lime"
+                      : "bg-linear-to-br from-rose-soft to-rose"
+                  }`}
+                >
+                  <p className="text-2xl text-chocolate-900">
+                    <span aria-hidden="true" className="mr-2">
+                      {budget.fits ? "👍" : "⚠️"}
+                    </span>
+                    {budget.fits ? (
+                      <>
+                        This fits your budget. After buying it you would have{" "}
+                        <strong>{money$(budget.after)}</strong> left.
+                      </>
+                    ) : (
+                      <>
+                        This is <strong>{money$(Math.abs(budget.after))}</strong> more
+                        than the {money$(budgetLeft)} you have left.
+                      </>
+                    )}
+                  </p>
+                </div>
+
+                {trimmed && (
+                  <div className="mt-6 rounded-2xl border-4 border-chocolate-700 bg-cream-50 p-5">
+                    <h3 className="text-2xl text-chocolate-900">
+                      What to buy with the {money$(budgetLeft)} you have
+                    </h3>
+                    <p className="mt-2 text-lg text-chocolate-600">
+                      The things that run out soonest, first.
+                    </p>
+
+                    <ul className="mt-4 flex flex-wrap gap-3">
+                      {trimmed.afford.map((line) => (
+                        <li
+                          key={line.ingredientId}
+                          className="rounded-full bg-linear-to-br from-matcha to-lime px-4 py-2 text-lg text-chocolate-900"
+                        >
+                          <span aria-hidden="true" className="mr-1.5">
+                            {line.icon}
+                          </span>
+                          {line.name} · {money$(line.cost)}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-3 text-xl font-bold text-chocolate-900">
+                      Buy now: {money$(trimmed.affordCost)}
+                    </p>
+
+                    {trimmed.postpone.length > 0 && (
+                      <>
+                        <h4 className="mt-6 text-xl font-bold text-chocolate-900">
+                          Leave until next time ({money$(trimmed.postponeCost)})
+                        </h4>
+                        <ul className="mt-3 flex flex-wrap gap-3">
+                          {trimmed.postpone.map((line) => (
+                            <li
+                              key={line.ingredientId}
+                              className="rounded-full bg-cream-200 px-4 py-2 text-lg text-chocolate-700"
+                            >
+                              <span aria-hidden="true" className="mr-1.5">
+                                {line.icon}
+                              </span>
+                              {line.name} · {money$(line.cost)}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                )}
 
                 {plan.buy.length > 0 && (
                   <>
