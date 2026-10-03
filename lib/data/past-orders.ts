@@ -25,11 +25,46 @@ export type PastOrder = {
 /** Newest first. */
 export const pastOrders: PastOrder[] = [
   {
+    id: "order-110014",
+    placedAt: "2026-10-02T19:45:00-04:00",
+    items: [
+      { name: "Grilled Cheese", icon: "🧀", menuItemId: "side-grilled-cheese", quantity: 1 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 4 },
+      { name: "Lemonade", icon: "🍋", menuItemId: "drink-lemonade", quantity: 3 },
+    ],
+  },
+  {
+    id: "order-110013",
+    placedAt: "2026-10-02T19:05:00-04:00",
+    items: [
+      { name: "Diavola", icon: "🌶️", menuItemId: "pizza-diavola", quantity: 2 },
+      { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 2 },
+    ],
+  },
+  {
+    id: "order-110012",
+    placedAt: "2026-10-02T18:10:00-04:00",
+    items: [
+      { name: "Margherita", icon: "🍕", menuItemId: "pizza-margherita", quantity: 2 },
+      { name: "Butter Croissant", icon: "🥐", menuItemId: "pastry-croissant", quantity: 4 },
+      { name: "Flat White", icon: "☕", menuItemId: "drink-flat-white", quantity: 2 },
+    ],
+  },
+  {
     id: "order-1018",
     placedAt: "2026-10-02T17:25:00-04:00",
     items: [
       { name: "Brown Butter Cookie", icon: "🍪", menuItemId: "cookie-brown-butter", quantity: 5 },
       { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 2 },
+    ],
+  },
+  {
+    id: "order-110011",
+    placedAt: "2026-10-02T16:45:00-04:00",
+    items: [
+      { name: "Tomato Soup", icon: "🍲", menuItemId: "side-tomato-soup", quantity: 1 },
+      { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 3 },
+      { name: "Blueberry Scone", icon: "🫐", menuItemId: "pastry-blueberry-scone", quantity: 4 },
     ],
   },
   {
@@ -39,6 +74,23 @@ export const pastOrders: PastOrder[] = [
       { name: "Cinnamon Roll", icon: "🧁", menuItemId: "pastry-cinnamon-roll", quantity: 3 },
       { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 1 },
       { name: "Brown Butter Cookie", icon: "🍪", menuItemId: "cookie-brown-butter", quantity: 4 },
+    ],
+  },
+  {
+    id: "order-110010",
+    placedAt: "2026-10-02T15:55:00-04:00",
+    items: [
+      { name: "Grilled Cheese", icon: "🧀", menuItemId: "side-grilled-cheese", quantity: 1 },
+      { name: "Banana Bread", icon: "🍌", menuItemId: "pastry-banana-bread", quantity: 4 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 4 },
+    ],
+  },
+  {
+    id: "order-110009",
+    placedAt: "2026-10-02T15:15:00-04:00",
+    items: [
+      { name: "Rosemary Focaccia", icon: "🍞", menuItemId: "focaccia-rosemary", quantity: 4 },
+      { name: "Cappuccino", icon: "☕", menuItemId: "drink-cappuccino", quantity: 4 },
     ],
   },
   {
@@ -66,6 +118,33 @@ export const pastOrders: PastOrder[] = [
     ],
   },
   {
+    id: "order-110008",
+    placedAt: "2026-10-02T13:05:00-04:00",
+    items: [
+      { name: "Tomato Soup", icon: "🍲", menuItemId: "side-tomato-soup", quantity: 2 },
+      { name: "Margherita", icon: "🍕", menuItemId: "pizza-margherita", quantity: 2 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 4 },
+    ],
+  },
+  {
+    id: "order-110007",
+    placedAt: "2026-10-02T12:35:00-04:00",
+    items: [
+      { name: "Grilled Cheese", icon: "🧀", menuItemId: "side-grilled-cheese", quantity: 1 },
+      { name: "Flat White", icon: "☕", menuItemId: "drink-flat-white", quantity: 4 },
+    ],
+  },
+  {
+    id: "order-110006",
+    placedAt: "2026-10-02T12:05:00-04:00",
+    items: [
+      { name: "Rosemary Focaccia", icon: "🍞", menuItemId: "focaccia-rosemary", quantity: 1 },
+      { name: "Diavola", icon: "🌶️", menuItemId: "pizza-diavola", quantity: 2 },
+      { name: "Chai Latte", icon: "🫖", menuItemId: "drink-chai-latte", quantity: 4 },
+      { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 4 },
+    ],
+  },
+  {
     id: "order-1013",
     placedAt: "2026-10-02T11:30:00-04:00",
     items: [
@@ -89,12 +168,46 @@ export const pastOrders: PastOrder[] = [
     ],
   },
   {
+    id: "order-110005",
+    placedAt: "2026-10-02T10:50:00-04:00",
+    items: [
+      { name: "Blueberry Scone", icon: "🫐", menuItemId: "pastry-blueberry-scone", quantity: 4 },
+      { name: "Butter Croissant", icon: "🥐", menuItemId: "pastry-croissant", quantity: 4 },
+    ],
+  },
+  {
+    id: "order-110004",
+    placedAt: "2026-10-02T10:15:00-04:00",
+    items: [
+      { name: "Chai Latte", icon: "🫖", menuItemId: "drink-chai-latte", quantity: 3 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 4 },
+      { name: "Cappuccino", icon: "☕", menuItemId: "drink-cappuccino", quantity: 2 },
+    ],
+  },
+  {
+    id: "order-110003",
+    placedAt: "2026-10-02T09:40:00-04:00",
+    items: [
+      { name: "Lemonade", icon: "🍋", menuItemId: "drink-lemonade", quantity: 4 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 1 },
+    ],
+  },
+  {
     id: "order-1042",
     placedAt: "2026-10-02T09:15:00-04:00",
     items: [
       { name: "Flat White", icon: "☕", menuItemId: "drink-flat-white", quantity: 2 },
       { name: "Butter Croissant", icon: "🥐", menuItemId: "pastry-croissant", quantity: 3 },
       { name: "Blueberry Scone", icon: "🫐", menuItemId: "pastry-blueberry-scone", quantity: 1 },
+    ],
+  },
+  {
+    id: "order-110002",
+    placedAt: "2026-10-02T08:45:00-04:00",
+    items: [
+      { name: "Brown Butter Cookie", icon: "🍪", menuItemId: "cookie-brown-butter", quantity: 4 },
+      { name: "Butter Croissant", icon: "🥐", menuItemId: "pastry-croissant", quantity: 4 },
+      { name: "Chai Latte", icon: "🫖", menuItemId: "drink-chai-latte", quantity: 4 },
     ],
   },
   {
@@ -112,6 +225,23 @@ export const pastOrders: PastOrder[] = [
     items: [
       { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 1 },
       { name: "Banana Bread", icon: "🍌", menuItemId: "pastry-banana-bread", quantity: 2 },
+    ],
+  },
+  {
+    id: "order-110001",
+    placedAt: "2026-10-02T07:35:00-04:00",
+    items: [
+      { name: "Apple Pie Slice", icon: "🥧", menuItemId: "pastry-apple-pie", quantity: 4 },
+      { name: "Brown Butter Cookie", icon: "🍪", menuItemId: "cookie-brown-butter", quantity: 1 },
+    ],
+  },
+  {
+    id: "order-110000",
+    placedAt: "2026-10-02T07:10:00-04:00",
+    items: [
+      { name: "Chamomile Tea", icon: "🍵", menuItemId: "drink-chamomile-tea", quantity: 1 },
+      { name: "Brown Butter Cookie", icon: "🍪", menuItemId: "cookie-brown-butter", quantity: 2 },
+      { name: "Hot Chocolate", icon: "🍫", menuItemId: "drink-hot-chocolate", quantity: 3 },
     ],
   },
   {

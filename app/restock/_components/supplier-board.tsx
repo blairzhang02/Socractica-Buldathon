@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { seedSuppliers, type Supplier } from "@/lib/data/suppliers";
 import {
   adviseSupplier,
+  boughtPerDay,
   dailyCost,
   money,
   type Advice,
@@ -30,16 +31,21 @@ const bigField =
   "w-full rounded-2xl border-4 border-chocolate-700 bg-cream-50 px-5 py-4 text-xl text-chocolate-900 outline-none focus:border-chocolate-500";
 const bigLabel = "mb-2 block text-xl font-bold text-chocolate-900";
 
-function amountLabel(supplier: Supplier) {
-  if (supplier.dailyAmount == null || supplier.unit == null) return "—";
-  return formatAmount(supplier.dailyAmount, supplier.unit);
+function amountLabel(supplier: Supplier, usedPerDay: DailyUsage) {
+  const bought = boughtPerDay(supplier, usedPerDay);
+  if (bought == null || supplier.unit == null) return "—";
+  return formatAmount(bought, supplier.unit);
 }
 
-function adviceLine(supplier: Supplier, advice: Advice) {
+function adviceLine(
+  supplier: Supplier,
+  advice: Advice,
+  usedPerDay: DailyUsage,
+) {
   if (advice.kind !== "up" && advice.kind !== "down") return null;
   const unit = supplier.unit ?? "each";
   return {
-    from: formatAmount(supplier.dailyAmount ?? 0, unit),
+    from: formatAmount(boughtPerDay(supplier, usedPerDay) ?? 0, unit),
     to: formatAmount(advice.suggested, unit),
   };
 }
@@ -61,7 +67,10 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
     return a?.kind === "up" || a?.kind === "down";
   });
 
-  const totalPerDay = suppliers.reduce((sum, s) => sum + dailyCost(s), 0);
+  const totalPerDay = suppliers.reduce(
+    (sum, s) => sum + dailyCost(s, usedPerDay),
+    0,
+  );
 
   function addSupplier() {
     const name = form.name.trim();
@@ -117,10 +126,11 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
         supplierId: supplier.id,
         name: supplier.name,
         email: supplier.email,
-        line: `${supplier.item}: ${formatAmount(supplier.dailyAmount ?? 0, unit)} a day to ${formatAmount(a.suggested, unit)} a day`,
+        line: `${supplier.item}: ${formatAmount(boughtPerDay(supplier, usedPerDay) ?? 0, unit)} a day to ${formatAmount(a.suggested, unit)} a day`,
       });
 
-      return { ...supplier, dailyAmount: a.suggested };
+      // Buying exactly what the orders need from now on.
+      return { ...supplier, buyingFactor: 1 };
     });
 
     setSuppliers(updated);
@@ -135,6 +145,10 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
         </span>
         Your suppliers
       </h2>
+
+      <p className="mb-6 text-xl text-chocolate-700">
+        The daily amounts come from what your orders got through this past week.
+      </p>
 
       <div className="rounded-3xl border-4 border-chocolate-700 bg-cream-100 p-6 sm:p-8">
         <h3 className="mb-5 text-2xl font-bold text-chocolate-900">
@@ -215,7 +229,7 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
       <ul className="mt-8 space-y-5">
         {suppliers.map((supplier) => {
           const a = advice.get(supplier.id) ?? { kind: "none" as const };
-          const change = adviceLine(supplier, a);
+          const change = adviceLine(supplier, a, usedPerDay);
 
           return (
             <li
@@ -234,10 +248,10 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-chocolate-900">
-                    {amountLabel(supplier)} a day
+                    {amountLabel(supplier, usedPerDay)} a day
                   </p>
                   <p className="text-xl text-chocolate-600">
-                    {money(dailyCost(supplier))} a day
+                    {money(dailyCost(supplier, usedPerDay))} a day
                   </p>
                 </div>
               </div>
@@ -245,8 +259,10 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
               <div className="mt-5 flex flex-wrap items-center gap-4 border-t-4 border-cream-300 pt-5">
                 {change ? (
                   <p
-                    className={`flex-1 rounded-2xl px-5 py-3 text-xl font-semibold text-chocolate-900 ${
-                      a.kind === "up" ? "bg-lime" : "bg-berry"
+                    className={`flex-1 rounded-2xl px-5 py-3 text-xl font-semibold ${
+                      a.kind === "up"
+                        ? "bg-lime text-chocolate-900"
+                        : "bg-ink-berry text-cream-50"
                     }`}
                   >
                     <span aria-hidden="true" className="mr-2">
@@ -304,6 +320,9 @@ export function SupplierBoard({ usedPerDay }: { usedPerDay: DailyUsage }) {
 
       <p className="mt-6 text-right text-2xl font-bold text-chocolate-900">
         All suppliers together: {money(totalPerDay)} a day
+        <span className="block text-xl font-semibold text-chocolate-600">
+          about {money(totalPerDay * 7)} a week
+        </span>
       </p>
 
       <div className="mt-10 rounded-3xl border-4 border-chocolate-700 bg-cream-100 p-6 sm:p-8">

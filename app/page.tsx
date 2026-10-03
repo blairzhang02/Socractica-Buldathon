@@ -47,7 +47,7 @@ export default function Page() {
     <div className="flex flex-1 flex-col px-5 py-6 sm:px-8 sm:py-8">
       <header className="mb-6 text-center sm:mb-8">
         <h1 className="text-4xl font-bold tracking-tight text-chocolate-900 sm:text-5xl">
-          Making Dough
+          LeftNoCrumbs
         </h1>
         <p className="mt-2 text-xl text-chocolate-600 sm:text-2xl">
           Tap a button to begin.

@@ -20,31 +20,53 @@ function tidy(amount: number): number {
 }
 
 /**
- * Compares what a supplier delivers each day against what the day's orders
- * actually used, and says whether to buy more or less.
+ * What a day's orders get through, rounded to an orderable amount. Null when
+ * the supplier is not tied to an ingredient the recipes use.
+ */
+export function neededPerDay(
+  supplier: Supplier,
+  usedPerDay: DailyUsage,
+): number | null {
+  if (!supplier.ingredientId) return null;
+  const used = usedPerDay[supplier.ingredientId];
+  if (used == null) return null;
+  return tidy(used);
+}
+
+/** What she currently has delivered each day: the need, times her habit. */
+export function boughtPerDay(
+  supplier: Supplier,
+  usedPerDay: DailyUsage,
+): number | null {
+  if (!supplier.ingredientId) return null;
+  const used = usedPerDay[supplier.ingredientId];
+  if (used == null) return null;
+  return tidy(used * (supplier.buyingFactor ?? 1));
+}
+
+/**
+ * Compares what a supplier delivers each day against what the orders actually
+ * used, and says whether to buy more or less.
  */
 export function adviseSupplier(
   supplier: Supplier,
   usedPerDay: DailyUsage,
 ): Advice {
-  const { ingredientId, dailyAmount } = supplier;
-  if (!ingredientId || dailyAmount == null) return { kind: "none" };
+  const needed = neededPerDay(supplier, usedPerDay);
+  const bought = boughtPerDay(supplier, usedPerDay);
+  if (needed == null || bought == null) return { kind: "none" };
+  if (needed === bought) return { kind: "keep" };
 
-  const used = usedPerDay[ingredientId];
-  if (used == null) return { kind: "none" };
+  const gap = Math.abs(bought - needed);
+  if (gap <= Math.max(bought, needed) * TOLERANCE) return { kind: "keep" };
 
-  const suggested = tidy(used);
-  if (suggested === dailyAmount) return { kind: "keep" };
-
-  const gap = Math.abs(dailyAmount - used);
-  if (gap <= Math.max(dailyAmount, used) * TOLERANCE) return { kind: "keep" };
-
-  return { kind: suggested > dailyAmount ? "up" : "down", suggested };
+  return { kind: needed > bought ? "up" : "down", suggested: needed };
 }
 
-export function dailyCost(supplier: Supplier): number {
-  if (supplier.dailyAmount != null && supplier.unitPrice != null) {
-    return supplier.dailyAmount * supplier.unitPrice;
+export function dailyCost(supplier: Supplier, usedPerDay: DailyUsage): number {
+  const bought = boughtPerDay(supplier, usedPerDay);
+  if (bought != null && supplier.unitPrice != null) {
+    return bought * supplier.unitPrice;
   }
   return supplier.dailyCost ?? 0;
 }

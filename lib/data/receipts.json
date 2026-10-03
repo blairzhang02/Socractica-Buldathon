@@ -3,25 +3,101 @@
     "id": "receipt-dry-goods-sep",
     "label": "Mulberry Dry Goods — 28 Sep",
     "lines": [
-      { "name": "00 Pizza Flour", "quantity": 25000, "unit": "g" },
-      { "name": "All-Purpose Flour", "quantity": 25000, "unit": "g" },
-      { "name": "Granulated Sugar", "quantity": 15000, "unit": "g" },
-      { "name": "Fine Sea Salt", "quantity": 5000, "unit": "g" },
-      { "name": "Cocoa Powder", "quantity": 1000, "unit": "g" },
-      { "name": "Espresso Beans", "quantity": 6000, "unit": "g" },
-      { "name": "Fresh Yeast", "quantity": 2000, "unit": "g" }
+      {
+        "name": "00 Pizza Flour",
+        "quantity": 25000,
+        "unit": "g"
+      },
+      {
+        "name": "All-Purpose Flour",
+        "quantity": 25000,
+        "unit": "g"
+      },
+      {
+        "name": "Granulated Sugar",
+        "quantity": 15000,
+        "unit": "g"
+      },
+      {
+        "name": "Fine Sea Salt",
+        "quantity": 5000,
+        "unit": "g"
+      },
+      {
+        "name": "Cocoa Powder",
+        "quantity": 1000,
+        "unit": "g"
+      },
+      {
+        "name": "Espresso Beans",
+        "quantity": 6000,
+        "unit": "g"
+      },
+      {
+        "name": "Fresh Yeast",
+        "quantity": 2000,
+        "unit": "g"
+      }
     ]
   },
   {
     "id": "receipt-cold-store-sep",
     "label": "Harbour Cold Store — 30 Sep",
     "lines": [
-      { "name": "Whole Milk", "quantity": 40000, "unit": "ml" },
-      { "name": "Unsalted Butter", "quantity": 5000, "unit": "g" },
-      { "name": "Fior di Latte", "quantity": 8000, "unit": "g" },
-      { "name": "San Marzano Tomatoes", "quantity": 36000, "unit": "g" },
-      { "name": "Extra Virgin Olive Oil", "quantity": 1000, "unit": "ml" },
-      { "name": "Heavy Cream", "quantity": 4000, "unit": "ml" }
+      {
+        "name": "Whole Milk",
+        "quantity": 40000,
+        "unit": "ml"
+      },
+      {
+        "name": "Unsalted Butter",
+        "quantity": 5000,
+        "unit": "g"
+      },
+      {
+        "name": "Fior di Latte",
+        "quantity": 8000,
+        "unit": "g"
+      },
+      {
+        "name": "San Marzano Tomatoes",
+        "quantity": 36000,
+        "unit": "g"
+      },
+      {
+        "name": "Extra Virgin Olive Oil",
+        "quantity": 1000,
+        "unit": "ml"
+      },
+      {
+        "name": "Heavy Cream",
+        "quantity": 4000,
+        "unit": "ml"
+      }
+    ]
+  },
+  {
+    "id": "valley-dairy-oct-1-murnsi6o",
+    "label": "Valley Dairy, Oct 1",
+    "lines": [
+      {
+        "name": "Heavy cream",
+        "quantity": 800,
+        "unit": "ml",
+        "price": 6.4
+      },
+      {
+        "name": "Unsalted butter",
+        "quantity": 900,
+        "unit": "g",
+        "price": 8.46
+      },
+      {
+        "name": "Honey",
+        "quantity": 500,
+        "unit": "g",
+        "price": 7.25
+      }
     ]
   }
 ]
